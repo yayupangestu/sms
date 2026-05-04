@@ -1,0 +1,497 @@
+:root {
+    --primary-color: #0ea5e9;
+    --secondary-color: #64748b;
+    /* Slate 500 */
+    --bg-color: #f1f5f9;
+    /* Light Gray Background */
+    --card-bg: #ffffff;
+    /* White Cards */
+    --text-color: #334155;
+    /* Slate 700 */
+    --border-color: #e2e8f0;
+    /* Light Border */
+    --accent-blue: #2563eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Afacad', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 1rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dashboard-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #0f172a 0%, #1e3a8a 50%, #172554 100%);
+    /* Deep Blue Gradient */
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 4px solid #38bdf8;
+    /* Light blue bottom border accent */
+    flex-shrink: 0;
+    color: white;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.logo-box {
+    background: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    border: 1px solid #cbd5e1;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-style: italic;
+    color: #2563eb;
+    /* Blue logo text */
+    line-height: 1;
+}
+
+.logo-sub {
+    font-size: 0.4rem;
+    color: #0f172a;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+}
+
+.header-title h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.datetime-display {
+    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    /* Light Blue Gradient Button */
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px 0 0 20px;
+    /* Rounded left side like tab */
+    font-family: 'Afacad', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: white;
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-right: -1rem;
+    /* Extend to edge if needed */
+}
+
+/* Charts Section (Split Layout) */
+.main-layout {
+    display: flex;
+    gap: 1.5rem;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    body {
+        height: auto;
+        overflow: auto;
+    }
+
+    .main-layout {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .left-panel {
+        padding-right: 0;
+        height: auto;
+    }
+
+    .right-panel {
+        height: auto;
+    }
+}
+
+.left-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-right: 0.5rem;
+    height: 100%;
+    overflow-y: auto;
+    /* Allow scrolling if charts get too tall on small screens */
+}
+
+/* Scrollbar styling for panels */
+.left-panel::-webkit-scrollbar,
+.table-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.left-panel::-webkit-scrollbar-thumb,
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 4px;
+}
+
+.left-panel::-webkit-scrollbar-track,
+.table-container::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 100%;
+}
+
+/* Chart Card Generic */
+.chart-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    /* Slightly softer corners */
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    border: 1px solid var(--border-color);
+}
+
+.chart-card h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    /* Increased from 1rem */
+    color: #4cceac;
+    /* Accent Green/Cyan for titles often seen in dark dashboards */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* Bar Chart Container for Chart.js */
+.bar-chart-container {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+/* Pie Chart Styles */
+.pie-card {
+    flex: 1;
+    max-height: 45%;
+    align-items: center;
+    justify-content: center;
+}
+
+.pie-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.pie-chart {
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    /* Update Gradient for Dark Mode */
+    background: conic-gradient(var(--c) calc(var(--p) * 1%),
+            #2e3a59 0
+            /* Dark track color */
+        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.pie-chart::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        linear-gradient(to right, transparent 49.5%, #4b5563 49.5%, #4b5563 50.5%, transparent 50.5%),
+        linear-gradient(to bottom, transparent 49.5%, #4b5563 49.5%, #4b5563 50.5%, transparent 50.5%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+    /* Subtle grid on pie */
+}
+
+/* To create the 'Donut' hole effect matching dark theme */
+.pie-chart::after {
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    background: var(--card-bg);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.pie-label {
+    font-size: 2rem;
+    /* Increased from 1.5rem */
+    font-weight: 800;
+    color: #000000;
+    /* Bold Black */
+    z-index: 2;
+    position: relative;
+    background: transparent;
+    border: none;
+}
+
+.pie-legend {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.legend-item {
+    font-size: 0.85rem;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot.target {
+    background: #fcd34d;
+    box-shadow: 0 0 5px #fcd34d;
+}
+
+.dot.actual {
+    background: #10b981;
+    box-shadow: 0 0 5px #10b981;
+}
+
+
+/* Table Card */
+.table-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1.2;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+.table-card h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: #4cceac;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.table-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 1.1rem;
+    /* Increased from 0.85rem */
+}
+
+th,
+td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    color: #000000;
+    /* Bold Black */
+    font-weight: 700;
+    /* Bold */
+}
+
+th {
+    font-weight: 600;
+    color: #a4a9fc;
+    /* Slight purple/blue tint for headers */
+    background-color: #2e3a59;
+    /* Slightly lighter than card header */
+    position: sticky;
+    top: 0;
+}
+
+tr:hover td {
+    background-color: #2b334a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .chart-card {
+        height: 300px;
+        /* Specific height for mobile/tablet to ensure charts render */
+    }
+}
+
+/* --- Modal & Button Styles --- */
+
+.chart-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.chart-header h2 {
+    margin-bottom: 0;
+    /* Override previous margin */
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.view-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.view-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Modal Overlay */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Black w/ opacity */
+    backdrop-filter: blur(4px);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 10% auto;
+    /* 10% from the top and centered */
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    margin-top: 1rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}

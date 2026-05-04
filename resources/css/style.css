@@ -1,0 +1,302 @@
+.custom-dashboard {
+    background: #1a2640;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+}
+  
+.metric-card {
+  /* background: linear-gradient(to bottom, #11ed2e 5%, #6699ff 96%); */
+    border-radius: 15px;
+    padding: 30px 20px;
+    color: #fff;
+    box-shadow: 0 6px 15px rgba(58, 142, 214, 0.3);
+    text-align: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 10px; /* Adjust as needed */
+    display: inline-block; /* Keeps the badge in line with text */
+}
+
+.metric-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(58, 142, 214, 0.4);
+}
+
+.metric-card h5 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #f0f4f8; /* Lighter text color for better contrast */
+    margin-bottom: 10px;
+}
+
+.metric-card h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+
+#incomingTable.table-hover tbody tr:hover {
+    background: linear-gradient(to bottom right, #ffffff 18%, #669999 77%);
+    color: #000000; /* Warna teks saat hover (opsional) */
+}
+  .small-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .small-box:hover {
+    transform: scale(2.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  .container {
+  display: flex;
+  flex-wrap: wrap; /* Membuat elemen pindah ke bawah jika ruang habis */
+  justify-content: center; /* Memposisikan elemen agar tetap di tengah */
+  gap: 10px; /* Jarak antar elemen */
+  padding: 10px;
+}
+
+.small-box {
+  background: #ffffff;
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.small-box:hover {
+  transform: scale(1.05); /* Animasi saat hover */
+}
+
+@media (max-width: 768px) {
+  .small-box {
+    width: 100%; /* Membuat elemen memenuhi lebar layar pada layar kecil */
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    flex-direction: column; /* Jika layar sangat kecil, buat semua elemen berbaris vertikal */
+    align-items: center;
+  }
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.carousel-content {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 10;
+}
+
+.carousel-button.left {
+    left: 0;
+}
+
+.carousel-button.right {
+    right: 0;
+}
+
+
+.partner-cost, .partner-cost-per-conv, .partner-roas, .partner-conversions {
+    grid-column: span 1;
+}
+
+
+.savings-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.savings-content {
+    flex-grow: 1;
+}
+
+/* CARD ATAS */
+/* General Card Styling */
+/* Info Box Styling */
+.info-box {
+  /* background: linear-gradient(to bottom, #3b6289 0%, #002850 100%); */
+  background:  #3d465f;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  position: relative;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Content Styling */
+.info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.info-title {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.info-value {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 8px 0;
+  color: #ffffff;
+}
+
+/* Icon Styling */
+.info-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 90px;
+  color: rgba(255, 255, 255, 0.584);
+}
+
+/* Change Text Styling */
+.info-change {
+  font-size: 14px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.info-change i {
+  margin-right: 5px;
+}
+
+/* Color for positive and negative changes */
+.text-success {
+  color: #4caf50;
+}
+
+.text-danger {
+  color: #f44336;
+}
+
+
+.monthly-budget-card .chart {
+    height: 150px;
+    margin-top: 20px;
+}
+
+.chart {
+    position: relative;
+    height: 250px; /* Adjust the height as needed */
+    margin-top: 15px;
+}
+
+.monthly-budget-card h5 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #f0f4f8;
+    margin-bottom: 15px;
+}
+
+/* TABEL */
+      .partner-card {
+          background-color: #2a4b7c; /* Adjust color as needed */
+          color: white;
+          padding: 16px;
+          border-radius: 8px;
+      }
+
+      .partner-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 10px;
+      }
+
+      .partner-table th,
+      .partner-table td {
+          padding: 8px;
+          text-align: left;
+          color: white;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .partner-table th {
+          font-weight: bold;
+          background-color: #3b5998; /* Slightly darker background for headers */
+      }
+
+      .partner-table tbody tr:nth-child(even) {
+          background-color: rgba(255, 255, 255, 0.1); /* Light background for alternate rows */
+      }
+
+      .partner-list {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 8px;
+      }
+
+      .partner-item {
+          display: contents; /* This makes each item appear like rows in a table */
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .partner-item span {
+          padding: 4px 8px;
+          text-align: center;
+      }
+
+          /* CSS for auto-scroll */
+      .auto-scroll tbody {
+        display: block;
+        animation: scroll 10s linear infinite;
+      }
+
+      .auto-scroll tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+      }
+
+      .auto-scroll thead, .auto-scroll tbody tr {
+        width: 100%;
+      }
+
+      /* Keyframes for scrolling effect */
+      @keyframes scroll {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-100%);
+        }
+      }
+/* BATAS */

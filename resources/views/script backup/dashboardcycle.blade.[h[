@@ -1,0 +1,120 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">DASHBOARD DELIVERY</h1>
+      </div>
+      <div class="col-sm-6 d-flex justify-content-end">
+        <!-- Breadcrumb for Rekap Survey -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Kanban Board starts here -->
+<section class="content">
+  <div class="container-fluid h-50">
+    <div class="row"> <!-- Row untuk menyusun card secara horizontal -->
+      
+      <!-- Backlog Column -->
+      <div class="col-md-3"> <!-- Menggunakan col-md-3 agar 4 kolom muat dalam 1 row -->
+        <div class="card card-row card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">AREA DUCKING 1</h3>
+          </div>
+          <div class="card-body">
+            <!-- Backlog Items -->
+            @foreach($scan_out_pcs as $scan)
+            <div class="card card-info card-outline">
+              <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">CYCLE {{ $scan->cycle }}</h5> <!-- Ganti dengan nama kolom siklus jika ada -->
+                <div class="card-tools">
+                  <strong><h6>{{ $scan->created_at }}</h6></strong>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="custom-control custom-checkbox d-flex align-items-center">
+                  <input class="custom-control-input" type="checkbox" id="customCheckbox{{ $scan->id }}" disabled>
+                  <label class="custom-control-label mr-2" for="customCheckbox{{ $scan->id }}">{{ $scan->job_no }}</label> <!-- Menampilkan job_no -->
+                  <strong><span class="ml-5">{{ $scan->qty }} PCS</span></strong> <!-- Menampilkan qty -->
+                </div>
+              </div>
+            </div>
+          @endforeach
+          </div>
+        </div>
+      </div>
+
+      <!-- To Do Column -->
+      <div class="col-md-3">
+        <div class="card card-row card-primary">
+          <div class="card-header">
+            <h3 class="card-title">AREA DUCKING 2</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary card-outline">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="card-title">CYCLE 2</h5>
+                    <div class="card-tools">
+                      <strong><h6></h6></strong>
+                      </a>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In Progress Column -->
+      <div class="col-md-3">
+        <div class="card card-row card-default">
+          <div class="card-header bg-info">
+            <h3 class="card-title">AREA DUCKING 3</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-light card-outline">
+              <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">Update Readme</h5>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-link">#2</a>
+                  <a href="#" class="btn btn-tool">
+                    <i class="fas fa-pen"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="card-body">
+                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Done Column -->
+      <div class="col-md-3">
+        <div class="card card-row card-success">
+          <div class="card-header">
+            <h3 class="card-title">AREA DUCKING 4</h3>
+          </div>
+          <div class="card-body">
+            <div class="card card-primary card-outline">
+              <div class="card-header d-flex justify-content-between">
+                <h5 class="card-title">Create repo</h5>
+                <div class="card-tools">
+                  <a href="#" class="btn btn-tool btn-link">#1</a>
+                  <a href="#" class="btn btn-tool">
+                    <i class="fas fa-pen"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- End Row -->
+  </div>
+</section>
+@endsection

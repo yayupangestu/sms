@@ -1,0 +1,256 @@
+
+/* General Styles */
+.content-header {
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+    position: relative; /* Ensure relative positioning for the badge */
+}
+
+/* Step Tracker Styles */
+.step-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 20px 0;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.step-icon .checkmark {
+    color: white; /* Change checkmark color to white */
+    background-color: transparent; /* Keep the background transparent if needed */
+}
+
+.step-icon {
+    border-radius: 50%; /* Ensure the circular shape */
+    background-color: #007bff; /* Set background color for the circular area */
+    width: 30px; /* Set width for the circle */
+    height: 30px; /* Set height for the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+.step .step-icon {
+    width: 30px;
+    height: 30px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-weight: bold;
+    z-index: 1;
+}
+
+.step .step-icon span,
+.step .step-icon i {
+    font-size: 14px;
+    color: #555;
+}
+
+.step .step-label p {
+    margin: 8px 0 4px;
+    font-weight: bold;
+}
+
+.step .step-label span {
+    font-size: 12px;
+    color: #888;
+}
+
+.completed .step-icon {
+    background-color: green;
+    color: white;
+ }
+
+.completed .step-icon .fas {
+   color: white; /* Checklist icon */
+}
+
+.step.active .step-icon {
+    border: 2px solid #ff9933;
+    background-color: #fff;
+    color: #ff9933;
+}
+
+/* Connecting Line */
+.step::after {
+    content: '';
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 100%;
+    height: 2px;
+    background-color: #e0e0e0;
+    z-index: 0;
+    transform: translateX(-50%);
+}
+
+.step:first-child::after {
+    width: 50%;
+    left: 50%;
+}
+
+.step:last-child::after {
+    width: 50%;
+    left: 0;
+}
+
+.step.completed::after {
+    background-color: #00ff2f;
+}
+
+/* Order Information and Location */
+.order-info, .location-info {
+    margin-top: 20px;
+}
+
+.order-info p, .location-info p {
+    margin: 4px 0;
+}
+
+.table-bordered th, .table-bordered td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Map Placeholder */
+#map {
+    height: 200px;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Status Badge */
+.status-badge {
+    background-color: #fff4e6;
+    color: #ff8500;
+    border: 1px solid #ff8500;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.step-icon {
+  position: relative; /* Pastikan posisi relative */
+}
+
+.truck-icon {
+  position: absolute;
+  top: -5px; /* Sesuaikan jarak dari atas */
+  left: 1%; /* Menempatkan di tengah */
+  transform: translateX(-50%);
+}
+
+.animated-truck {
+  width: 70px; /* Ukuran truk kecil */
+  animation: moveTruck 3s infinite; /* Animasi bergerak */
+}
+
+step-icon {
+    position: relative; /* Supaya truck bisa diposisikan berdasarkan step-icon */
+}
+
+/* Class untuk memindahkan forklift ke posisi yang tepat */
+.move-to-second-step {
+    transform: translateX(100%); /* Mengatur posisi baru untuk forklift */
+    opacity: 0; /* Menghilangkan truck di langkah pertama */
+}
+
+@keyframes moveTruck {
+  0% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(-30%); /* Bergerak ke kiri */
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+
+  
+}
+
+.list-group {
+    background: linear-gradient(135deg, #3a8ed6, #62b6f4);
+    border-radius: 15px;
+    color: #000000;
+    box-shadow: 0 6px 15px rgba(58, 142, 214, 0.3);
+    text-align: center;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-group-item {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border: 1.5px solid #eaeaea;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item .tracking-id {
+    font-weight: bold;
+    font-size: 1.1em;
+    display: block;
+}
+
+.list-group-item small {
+    display: block;
+    color: #999;
+}
+
+.badge {
+    font-size: 0.9em;
+    padding: 2px 10px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+.checkmark {
+    color: white; /* Mengubah warna centang menjadi putih */
+    font-size: 24px; /* Atur ukuran font sesuai kebutuhan */
+    font-weight: bold; /* Opsional: Mengatur ketebalan font */
+}
+
+
+
