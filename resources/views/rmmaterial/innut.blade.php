@@ -628,6 +628,13 @@
     $(document).ready(function () {
       $("#example1").show();
       list();
+
+      // Initialize Select2 with Modal Support
+      $('.select2').select2({
+        theme: 'bootstrap4',
+        width: '100%',
+        dropdownParent: $('#myModal2')
+      });
     });
 
 
@@ -780,7 +787,7 @@
             render: function (data, type, row) {
               return `
                                               <div class="d-flex align-items-center justify-content-center gap-3">
-                                                  <input type="checkbox" class="checkbox-row" value="${data}" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-blue)">
+                                                  <input type="checkbox" class="checkbox-row" value="${row.id}" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-blue)">
                                                   <a href="#" id="btn_pdf" title="QR Code" data-id="${row.id}" class="btn btn-info btn-icon-square">
                                                         <i class="fa-solid fa-qrcode"></i>
                                                   </a>
