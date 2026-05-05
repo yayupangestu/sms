@@ -9,7 +9,6 @@ use App\Models\RmSupplierNut;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use DataTables;
-use PDFMerger;
 use DB;
 
 class RmInNutController extends Controller
@@ -365,36 +364,53 @@ public function updateQtyIn(Request $request)
 
 public function printMultiple(Request $request)
 {
-    $ids = $request->input('ids'); // Ambil daftar ID dari request
-
-    // Ambil data berdasarkan ID
+    $ids = $request->input('ids');
     $items = RmInNut::whereIn('id', $ids)->get();
-
-    // Buat instance PDFMerger
-    $pdfMerger = new PDFMerger();
-
+    
+    $labels = [];
     foreach ($items as $item) {
-        $data = [
-            'data' => $item,
-            'supplier_name' => $item->supplier_name, // Pastikan ini sesuai dengan struktur model
-            'no'            => $item->no,
-            'qty_in'        => $item->qty_in,
-            'part_nut'      => $item->part_nut,
-            'qrcode'        => $item->qrcode,
-        ];
+        $rm_standart_nuts = RmStandartNut::find($item->material_id);
+        $rm_supplier_nuts = RmSupplierNut::find($item->suplai_id);
         
-        // Buat PDF dari view
-        $pdf = PDF::loadView('rmmaterial.cetaknut', $data);
-        $pdfMerger->addPDF($pdf->output(), 'all'); // Menambahkan PDF
+        if (!$rm_standart_nuts || !$rm_supplier_nuts) continue;
+
+        $uniqNo = 'SP' . date('y') . '/' . date('dm') . $item->no;
+        $data_to_encode = $rm_standart_nuts->part_nut . '||' . $rm_supplier_nuts->name_suplai . '||' . $item->qty_plan . '||' . $uniqNo;
+        $qrcode = base64_encode(QrCode::format('svg')->size(100)->errorCorrection('H')->generate($data_to_encode));
+
+        $labels[] = [
+            'qrcode'   => $qrcode,
+            'part_nut' => $rm_standart_nuts->part_nut
+        ];
     }
 
-    // Simpan file PDF gabungan
-    $outputFile = 'merged.pdf'; // Nama file keluaran
-    $pdfMerger->merge('file', storage_path('app/public/pdf/' . $outputFile)); // Simpan ke storage
+    $pdf = Pdf::loadView('rmmaterial.cetaknut_batch', compact('labels'))
+        ->setPaper([0, 0, 75.73, 65.04], 'portrait')
+        ->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
+    // Save to a temporary file in public storage so it can be opened via URL
+    $filename = 'batch_labels_' . time() . '.pdf';
+    $path = 'pdf/' . $filename;
+    
+    // Ensure directory exists in public folder
+    if (!file_exists(public_path('pdf'))) {
+        mkdir(public_path('pdf'), 0777, true);
+    }
+    
+    $pdf->save(public_path('pdf/' . $filename));
 
     return response()->json([
-        'pdf_url' => route('download.file', ['filename' => $outputFile])
+        'pdf_url' => asset('pdf/' . $filename)
     ]);
+}
+
+public function downloadFile($filename)
+{
+    $path = public_path('pdf/' . $filename);
+    if (!file_exists($path)) {
+        return abort(404);
+    }
+    return response()->download($path);
 }
 
 
