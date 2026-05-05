@@ -457,7 +457,7 @@
             </div>
             <div class="ml-auto d-flex gap-2">
               <button class="btn btn-primary" id="btn_submit"><i class="fa-solid fa-floppy-disk"></i> Save Final</button>
-              <button class="btn btn-danger" id="btn_cancel"><i class="fa-solid fa-circle-xmark"></i> Cancel</button>
+              <!-- <button class="btn btn-danger" id="btn_cancel"><i class="fa-solid fa-circle-xmark"></i> Cancel</button> -->
               <button class="btn btn-light" data-dismiss="modal"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
@@ -755,7 +755,7 @@
             name: 'material_id',
             render: function (data, type, row) {
               return `<div style="font-weight: 600; color: var(--accent-cyan)">${data}</div>
-                                                    <div class="small text-muted">${row.category_id}</div>`;
+                                                        <div class="small text-muted">${row.category_id}</div>`;
             }
           },
           {
@@ -770,15 +770,15 @@
             name: 'id',
             render: function (data) {
               return `
-                              <div class="d-flex gap-2 justify-content-center">
-                                <button id="btn_edit_line" title="Edit" data-id="${data}" class="btn btn-warning btn-icon-square">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
-                                <button id="btn_delete_line" title="Delete" data-id="${data}" class="btn btn-danger btn-icon-square">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                              </div>
-                          `;
+                                  <div class="d-flex gap-2 justify-content-center">
+                                    <button id="btn_edit_line" title="Edit" data-id="${data}" class="btn btn-warning btn-icon-square">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                    <button id="btn_delete_line" title="Delete" data-id="${data}" class="btn btn-danger btn-icon-square">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                  </div>
+                              `;
             }
           },
           {
@@ -786,13 +786,13 @@
             name: 'no',
             render: function (data, type, row) {
               return `
-                                              <div class="d-flex align-items-center justify-content-center gap-3">
-                                                  <input type="checkbox" class="checkbox-row" value="${row.id}" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-blue)">
-                                                  <a href="#" id="btn_pdf" title="QR Code" data-id="${row.id}" class="btn btn-info btn-icon-square">
-                                                        <i class="fa-solid fa-qrcode"></i>
-                                                  </a>
-                                              </div>
-                                          `;
+                                                  <div class="d-flex align-items-center justify-content-center gap-3">
+                                                      <input type="checkbox" class="checkbox-row" value="${row.id}" style="width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent-blue)">
+                                                      <a href="#" id="btn_pdf" title="QR Code" data-id="${row.id}" class="btn btn-info btn-icon-square">
+                                                            <i class="fa-solid fa-qrcode"></i>
+                                                      </a>
+                                                  </div>
+                                              `;
             },
             orderable: false,
             searchable: false
@@ -918,17 +918,26 @@
     });
 
     function clear() {
+      // Clear all hidden and text inputs
       $("#id").val('');
       $('#doc_no').val('');
-      $("#date_plan").val(null).trigger('change');
+      $('#qty_in').val('');
+      $('#keterangan').val('');
+
+      // Clear date inputs
+      $("#date_plan").val('');
+      $("#date_delivery").val('');
+
+      // Clear Select2 dropdowns
       $('#suplai_id').val(null).trigger('change');
       $('#category_id').val(null).trigger('change');
       $('#material_id').val(null).trigger('change');
-      $('#qty_in').val('');
-      $('#keterangan').val('');
-      $('#date_delivery').val(null).trigger('change');
-      
-      // Reset buttons and UI
+
+      // Refresh the detail table to show an empty state
+      listdetail();
+
+      // Reset UI elements
+      $("#alert").hide().html('');
       $(".Save").show();
       $(".Update").hide();
       $("#title1").show();
