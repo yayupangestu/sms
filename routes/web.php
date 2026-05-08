@@ -1886,6 +1886,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokAtkController@export')->name('stokatk.export');
     });
 
+    Route::group(['prefix' => 'stokrtk'], function () {
+        Route::get('/', 'StrStokRtkController@index')->name('stokrtk.index');
+        Route::get('/list', 'StrStokRtkController@list')->name('stokrtk.list');
+        Route::post('/create', 'StrStokRtkController@store')->name('stokrtk.store');
+        Route::get('/edit', 'StrStokRtkController@edit')->name('stokrtk.edit');
+        Route::post('/update', 'StrStokRtkController@update')->name('stokrtk.update');
+        Route::post('/delete', 'StrStokRtkController@destroy')->name('stokrtk.destroy');
+        Route::get('users/export', 'StrStokRtkController@export')->name('stokrtk.export');
+    });
+
 });
 
 
