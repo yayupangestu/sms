@@ -1896,6 +1896,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokRtkController@export')->name('stokrtk.export');
     });
 
+    Route::group(['prefix' => 'stokconsum'], function () {
+        Route::get('/', 'StrStokConsumController@index')->name('stokconsum.index');
+        Route::get('/list', 'StrStokConsumController@list')->name('stokconsum.list');
+        Route::post('/create', 'StrStokConsumController@store')->name('stokconsum.store');
+        Route::get('/edit', 'StrStokConsumController@edit')->name('stokconsum.edit');
+        Route::post('/update', 'StrStokConsumController@update')->name('stokconsum.update');
+        Route::post('/delete', 'StrStokConsumController@destroy')->name('stokconsum.destroy');
+        Route::get('users/export', 'StrStokConsumController@export')->name('stokconsum.export');
+        Route::get('/stokconsum/export-summary', 'StrStokConsumController@exportSummary')->name('consum.export.summary');
+
+    });
+
 });
 
 
