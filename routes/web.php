@@ -1862,6 +1862,30 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrSuplaierController@export')->name('supplier.export');
     });
 
+    Route::get('/check-stock', 'CekStokController@checkStock');
+    Route::get('/check-stock2', 'CekStokController@checkStock2');
+    Route::get('/check-stock3', 'CekStokController@checkStock3');
+    Route::get('/check-stock4', 'CekStokController@checkStock4');
+    Route::get('/check-stock5', 'CekStokController@checkStock5');
+    Route::get('/check-stock6', 'CekStokController@checkStock6');
+    Route::get('/check-stock7', 'CekStokController@checkStock7');
+    Route::get('/check-stock8', 'CekStokController@checkStock8');
+    Route::get('/check-stock9', 'CekStokController@checkStock9');
+    Route::get('/check-stock10', 'CekStokController@checkStock10');
+    Route::get('/check-stock11', 'CekStokController@checkStock11');
+    Route::get('/check-stock-becak', 'CekStokController@checkStockBecak');
+
+
+    Route::group(['prefix' => 'stokatk'], function () {
+        Route::get('/', 'StrStokAtkController@index')->name('stokatk.index');
+        Route::get('/list', 'StrStokAtkController@list')->name('stokatk.list');
+        Route::post('/create', 'StrStokAtkController@store')->name('stokatk.store');
+        Route::get('/edit', 'StrStokAtkController@edit')->name('stokatk.edit');
+        Route::post('/update', 'StrStokAtkController@update')->name('stokatk.update');
+        Route::post('/delete', 'StrStokAtkController@destroy')->name('stokatk.destroy');
+        Route::get('users/export', 'StrStokAtkController@export')->name('stokatk.export');
+    });
+
 });
 
 
