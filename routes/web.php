@@ -1908,6 +1908,17 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'stokgas'], function () {
+        Route::get('/', 'StrStokGasController@index')->name('stokgas.index');
+        Route::get('/list', 'StrStokGasController@list')->name('stokgas.list');
+        Route::post('/create', 'StrStokGasController@store')->name('stokgas.store');
+        Route::get('/edit', 'StrStokGasController@edit')->name('stokgas.edit');
+        Route::post('/update', 'StrStokGasController@update')->name('stokgas.update');
+        Route::post('/delete', 'StrStokGasController@destroy')->name('stokgas.destroy');
+        Route::get('users/export', 'StrStokGasController@export')->name('stokgas.export');
+    });
+
+
 });
 
 
