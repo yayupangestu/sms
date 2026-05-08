@@ -290,8 +290,85 @@
                     </div>
                 </div>
             </div>
+
+            <!-- MPS Planning Section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="glass-card">
+                        <div class="card-header-premium">
+                            <h6><i class="ph-bold ph-calendar-check mr-2"></i>MPS Planning Schedule</h6>
+                            <div class="d-flex align-items-center">
+                                <label for="plan_date" class="mb-0 mr-3 text-muted small">Select Date:</label>
+                                <input type="date" id="plan_date" class="form-control form-control-sm" 
+                                       style="background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); color: white; border-radius: 0.5rem; width: 150px;"
+                                       value="{{ date('Y-m-d') }}">
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="table-responsive" style="max-height: 500px;">
+                                <table id="mps-table" class="premium-table">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th style="width: 5%;">No</th>
+                                            <th>Part Name</th>
+                                            <th>Job No</th>
+                                            <th>Part No</th>
+                                            <th>Model</th>
+                                            <th>Qty Plan</th>
+                                            <th>Line Robot</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <!-- Data will be loaded via AJAX -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="mps-empty-state" class="text-center py-5">
+                                <i class="ph-bold ph-calendar-blank text-muted display-4 mb-3 d-block"></i>
+                                <p class="text-muted">Tidak ada jadwal planning untuk tanggal ini</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- BOM Selection Modal -->
+    <div class="modal fade" id="bomModal" tabindex="-1" role="dialog" aria-labelledby="bomModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content" style="background: #1e293b; color: white; border-radius: 1.5rem; border: 1px solid var(--glass-border);">
+                <div class="modal-header border-glass">
+                    <h5 class="modal-title" id="bomModalLabel"><i class="ph-bold ph-tree-structure mr-2"></i>BOM Structure for Job: <span id="modal-job-no" class="text-primary"></span></h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="bom-table" class="premium-table">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>No</th>
+                                    <th>Uniq No</th>
+                                    <th>Job No (Child)</th>
+                                    <th>Part No</th>
+                                    <th>Model</th>
+                                    <th>Part Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <!-- Data will be loaded via AJAX -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Dependencies -->
     <script src="https://unpkg.com/html5-qrcode"></script>
@@ -576,6 +653,190 @@
                     }, 300);
                 }
             }
+
+            function loadMpsData(date) {
+                $.ajax({
+                    url: "{{ route('scanbps.mpsData') }}",
+                    method: 'GET',
+                    data: { date: date },
+                    success: function(response) {
+                        const tbody = $('#mps-table tbody');
+                        tbody.empty();
+                        
+                        if (response.success && response.data.length > 0) {
+                            $('#mps-empty-state').hide();
+                            response.data.forEach((item, index) => {
+                                const statusBadge = item.status == 1 
+                                    ? '<span class="badge badge-success">Active</span>' 
+                                    : '<span class="badge badge-secondary">Inactive</span>';
+                                    
+                                const row = `
+                                    <tr>
+                                        <td>${index + 1}</td>
+                                        <td>${item.part_name || '-'}</td>
+                                        <td class="font-weight-bold text-white">${item.job_no}</td>
+                                        <td>${item.part_no}</td>
+                                        <td>${item.model_id || '-'}</td>
+                                        <td class="text-info font-weight-bold">${item.qty_plan}</td>
+                                        <td>${item.line_robot || '-'}</td>
+                                        <td>${statusBadge}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info" onclick="openBomModal('${item.job_no}')">
+                                                <i class="ph ph-list-plus"></i> Process
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                                tbody.append(row);
+                            });
+                        } else {
+                            $('#mps-empty-state').show();
+                        }
+                    },
+                    error: function() {
+                        Swal.fire('Error', 'Gagal memuat data planning.', 'error');
+                    }
+                });
+            }
+
+            window.openBomModal = function(jobNo) {
+                $('#modal-job-no').text(jobNo);
+                $('#bom-table tbody').empty();
+                $('#bomModal').modal('show');
+                
+                $.ajax({
+                    url: "{{ route('scanbps.bomData') }}",
+                    method: 'GET',
+                    data: { job_no: jobNo },
+                    success: function(response) {
+                        if (response.success) {
+                            const tbody = $('#bom-table tbody');
+                            response.data.forEach((item, index) => {
+                                const row = `
+                                    <tr>
+                                        <td>${index + 1}</td>
+                                        <td class="text-white font-weight-bold">${item.uniqNo}</td>
+                                        <td>${item.part_no2}</td>
+                                        <td>${item.part_no2}</td>
+                                        <td>${item.model || '-'}</td>
+                                        <td>${item.part_name2 || '-'}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success" onclick="addToScanResultsFromBom('${item.uniqNo}', '${item.part_no2}', '${item.part_no2}', '${item.model}')">
+                                                <i class="ph ph-plus-circle"></i> Add
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `;
+                                tbody.append(row);
+                            });
+                        }
+                    }
+                });
+            }
+
+            window.addToScanResultsFromBom = function(uniqNo, partNo, jobNo, model) {
+                $.ajax({
+                    url: "{{ route('getQtyActStmp') }}",
+                    method: 'GET',
+                    data: {
+                        uniqNo: uniqNo,
+                        part_no: partNo
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            const qtyAct = response.qty_act || 0;
+                            
+                            Swal.fire({
+                                title: '📦 Add Part from BOM',
+                                html: `
+                                    <div style="text-align:left; font-size: 1rem; color: #cbd5e1;">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Uniq No</span>
+                                            <span class="text-white font-weight-bold">${uniqNo}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Part No</span>
+                                            <span class="text-white font-weight-bold">${partNo}</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-3 border-bottom border-glass pb-2">
+                                            <span>Stok Tersedia</span>
+                                            <span style="color:#10b981; font-weight: 700; font-size: 1.25rem;">${qtyAct}</span>
+                                        </div>
+                                        <label class="font-weight-600 mb-2">Quantity Pengambilan</label>
+                                        <input type="number" id="inputBomQty" class="swal2-input w-100 m-0" placeholder="0">
+                                    </div>
+                                `,
+                                showCancelButton: true,
+                                confirmButtonText: 'Tambahkan',
+                                confirmButtonColor: '#06b6d4',
+                                preConfirm: () => {
+                                    const val = document.getElementById('inputBomQty').value;
+                                    const qty = parseInt(val);
+                                    if (isNaN(qty) || qty <= 0) {
+                                        Swal.showValidationMessage('Masukkan jumlah > 0');
+                                        return false;
+                                    }
+                                    if (qty > qtyAct) {
+                                        Swal.showValidationMessage(`Melebihi stok (${qtyAct})`);
+                                        return false;
+                                    }
+                                    return qty;
+                                }
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    const additional_qty = result.value;
+                                    
+                                    // Check duplicate
+                                    let isDuplicate = false;
+                                    $('#scan-results tbody tr').each(function() {
+                                        if ($(this).find('td:eq(1)').text().trim() === uniqNo) {
+                                            isDuplicate = true;
+                                        }
+                                    });
+
+                                    if (isDuplicate) {
+                                        Swal.fire('Warning', 'Data sudah ada di daftar.', 'warning');
+                                        return;
+                                    }
+
+                                    scanCount++;
+                                    const rowId = `scan-row-${scanCount}`;
+                                    const newRow = `
+                                        <tr id="${rowId}">
+                                            <td>${scanCount}</td>
+                                            <td class="font-weight-bold text-white">${uniqNo}</td>
+                                            <td>${jobNo}</td>
+                                            <td>${partNo}</td>
+                                            <td>${model || '-'}</td>
+                                            <td class="text-muted">${qtyAct}</td>
+                                            <td class="text-info font-weight-bold">${additional_qty}</td>
+                                            <td><span class="badge badge-premium badge-internal">BOM</span></td>
+                                            <td>
+                                                <button class="btn btn-remove" onclick="removeRow('${rowId}')">
+                                                    <i class="ph ph-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                    $('#scan-results tbody').append(newRow);
+                                    updateCounter();
+                                    $('#bomModal').modal('hide');
+                                    Swal.fire('Success', 'Part ditambahkan ke daftar scan.', 'success');
+                                }
+                            });
+                        } else {
+                            Swal.fire('Error', response.message, 'error');
+                        }
+                    }
+                });
+            }
+
+            $('#plan_date').on('change', function() {
+                loadMpsData($(this).val());
+            });
+
+            // Initial load for today
+            loadMpsData($('#plan_date').val());
 
             var htmlScanner = new Html5QrcodeScanner("my-qr-reader", {
                 fps: 25,

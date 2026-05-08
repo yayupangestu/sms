@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\DB;
 
 class ScanInLineStoreController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $title = 'Scan In Part';
-       return view('linestore.scanin2',compact('title'));
+        return view('linestore.scanin2', compact('title'));
     }
 
     public function checkRepair(Request $request)
@@ -37,16 +38,16 @@ class ScanInLineStoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'part_no2'          => 'required|string',
-            'part_no'           => 'required|string',
-            'job_no'            => 'required|string',
-            'model'             => 'required|string',
-            'qty'               => 'required|string', // ✅ pastikan ini number
-            'date_plan'              => 'required|string',
-            'uniqNo'            => 'required|string',
-            'KodeMaterial'      => 'required|string',
-            'uniqNo'            => 'required|string',
-            'id_data'           => 'required|numeric',
+            'part_no2' => 'required|string',
+            'part_no' => 'required|string',
+            'job_no' => 'required|string',
+            'model' => 'required|string',
+            'qty' => 'required|string', // ✅ pastikan ini number
+            'date_plan' => 'required|string',
+            'uniqNo' => 'required|string',
+            'KodeMaterial' => 'required|string',
+            'uniqNo' => 'required|string',
+            'id_data' => 'required|numeric',
         ]);
 
         // 🔒 Cek apakah sudah pernah discan
@@ -89,15 +90,16 @@ class ScanInLineStoreController extends Controller
                 }
             }
             $ScanOutStmpItems = ScanOutStmp::where('part_no2', $request->part_no)
-            ->where('uniqNo', $request->uniqNo)
-            ->get();
-        if ($ScanOutStmpItems->isNotEmpty()) {
-            foreach ($ScanOutStmpItems as $item) {
-                $item->scan_in_ls = now();
-                $item->status_ls = 1;
-                $item->save();
+                ->where('uniqNo', $request->uniqNo)
+                ->get();
+            if ($ScanOutStmpItems->isNotEmpty()) {
+                foreach ($ScanOutStmpItems as $item) {
+                    $item->scan_in_ls = now();
+                    $item->status_ls = 1;
+                    $item->status = 3;
+                    $item->save();
+                }
             }
-        }
             DB::commit();
 
             return response()->json([

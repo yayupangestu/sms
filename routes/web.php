@@ -1685,6 +1685,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/scanbps/store-batch', [ScanBpsPartController::class, 'storeBatch'])->name('scanbps.storeBatch');
         // routes/web.php
         Route::get('/getQtyActStmp', [ScanBpsPartController::class, 'getQtyActStmp'])->name('getQtyActStmp');
+        Route::get('/mps-data', [ScanBpsPartController::class, 'getMpsPlannings'])->name('scanbps.mpsData');
+        Route::get('/bom-data', [ScanBpsPartController::class, 'getBomDataByJobNo'])->name('scanbps.bomData');
 
     });
 

@@ -79,7 +79,9 @@ public function getScanOutStmps(Request $request)
 
     // Ambil data berdasarkan part_no2 dan tampilkan kolom uniqNo
     $data = ScanOutStmp::where('part_no2', $partNo2)
-        ->select('uniqNo', 'job_no', 'part_no2', 'model', 'qty_act','qty_ng','createdby', 'date_plan', 'kode_material','date_scan','status','status_2','ng_repair','scan_in_ls') // Menambahkan kolom uniqNo
+        ->select('uniqNo', 'job_no', 'part_no2', 'model', 'qty_act','qty_ng','createdby', 'date_plan', 'kode_material','date_scan','status','status_2','ng_repair','scan_in_ls')
+        ->orderBy('date_plan', 'desc')
+        ->orderBy('date_scan', 'desc')
         ->get();
 
     // Return data
@@ -94,6 +96,7 @@ public function getScanPartBps(Request $request)
 
     $data = ScanPartBps::where('part_no2', $part_no2)
                 ->where('uniqNo', $uniqNo)
+                ->orderBy('date_plan', 'desc')
                 ->get();
 
     return response()->json(['data' => $data]);
@@ -113,6 +116,7 @@ public function getPlanningLineB3(Request $request)
         ->select('mesin', 'model_id', 'qty_plan', 'rm_spek', 'part_no2', 'date_plan','createdby','created_at')
         ->where('part_no2', $partNo2)
         ->where('date_plan', $datePlan)
+        ->orderBy('created_at', 'desc')
         ->get();
 
     return response()->json(['data' => $data]);
@@ -124,6 +128,7 @@ public function getPlanningLineB3(Request $request)
             $data = DB::table('line_store_stoks')
                 ->where('home_line', 'INHOUSE') // Filter berdasarkan customer "TCF-2"
                 ->select('job_no', 'part_name', 'part_no', 'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); 
     
             return DataTables::of($data)
@@ -138,6 +143,7 @@ public function getPlanningLineB3(Request $request)
             $data = DB::table('line_store_stoks')
                 ->where('home_line', 'OUTHOUSE') // Filter berdasarkan customer "TCF-2"
                 ->select('job_no', 'part_name', 'part_no', 'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); 
     
             return DataTables::of($data)
@@ -156,6 +162,7 @@ public function getPlanningLineB3(Request $request)
                     ;
             })
             ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             return DataTables::of($data)
@@ -174,6 +181,7 @@ public function getPlanningLineB3(Request $request)
                     ;
             })
             ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
             return DataTables::of($data)
@@ -190,6 +198,7 @@ public function getPlanningLineB3(Request $request)
                 ->whereColumn('qty_actual', '<=', 'qty_min') // qty_actual <= qty_min
                 ->where('qty_actual', '!=', 0) // Exclude qty_actual = 0
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
 
             return DataTables::of($data)
@@ -206,6 +215,7 @@ public function getPlanningLineB3(Request $request)
                 ->whereColumn('qty_actual', '<=', 'qty_min') // qty_actual <= qty_min
                 ->where('qty_actual', '!=', 0) // Exclude qty_actual = 0
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
 
             return DataTables::of($data)
@@ -224,6 +234,7 @@ public function getPlanningLineB3(Request $request)
                           ->orWhereNull('qty_actual');
                 })
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -242,6 +253,7 @@ public function getPlanningLineB3(Request $request)
                           ->orWhereNull('qty_actual');
                 })
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -257,6 +269,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['D14N','D14N/D12L']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -272,6 +285,7 @@ public function getPlanningLineB3(Request $request)
             ->whereIn('model', ['D14N','D14N/D12L']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -288,6 +302,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('qty_min', '>=', 0) // Pastikan qty_min lebih dari atau sama dengan 0
                 ->whereColumn('qty_actual', '<', 'qty_min') // Hanya data dengan qty_actual lebih kecil dari qty_min
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -303,6 +318,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['D26A','D26A/D55L/D03B','D55L/D26A/D74A/D03B UPB','D55L/D26A/D74A']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -318,6 +334,7 @@ public function getPlanningLineB3(Request $request)
             ->whereIn('model', ['D26A','D26A/D55L/D03B','D55L/D26A/D74A/D03B UPB','D55L/D26A/D74A']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -334,6 +351,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('qty_min', '>=', 0) // Pastikan qty_min lebih dari atau sama dengan 0
                 ->whereColumn('qty_actual', '<', 'qty_min') // Hanya data dengan qty_actual lebih kecil dari qty_min
                 ->select('job_no', 'part_name', 'part_no',  'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -349,6 +367,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['D40G','D40L' ,'D40G/DCWA','D40G/D40L/D72A','D40G/D40L']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -364,7 +383,8 @@ public function getPlanningLineB3(Request $request)
             ->where('home_line', 'INHOUSE')
               ->whereIn('model', ['D40G','D40L', 'D40G/DCWA', 'D40G/D40L/D72A', 'D40G/D40L']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
-                ->select('job_no', 'part_name', 'part_no', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->select('job_no', 'part_name', 'part_no', 'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -381,7 +401,8 @@ public function getPlanningLineB3(Request $request)
               ->whereIn('model', ['D40G','D40L' ,'D40G/DCWA','D40G/D40L/D72A','D40G/D40L']) // Pastikan bisa membaca variasi nama
                 ->where('qty_min', '>=', 0) // Pastikan qty_min lebih dari atau sama dengan 0
                 ->whereColumn('qty_actual', '<', 'qty_min') // Hanya data dengan qty_actual lebih kecil dari qty_min
-                ->select('job_no', 'part_name', 'part_no', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->select('job_no', 'part_name', 'part_no', 'part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -397,6 +418,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['D30D','D30']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -412,6 +434,7 @@ public function getPlanningLineB3(Request $request)
              ->whereIn('model', ['D30D','D30']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -428,6 +451,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('qty_min', '>=', 0) // Pastikan qty_min lebih dari atau sama dengan 0
                 ->whereColumn('qty_actual', '<', 'qty_min') // Hanya data dengan qty_actual lebih kecil dari qty_min
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -444,6 +468,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['D03B UNB','D03B UPB','D55L/D26A/D74A/D03B UPB','D26A/D55L/D03B']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -459,6 +484,7 @@ public function getPlanningLineB3(Request $request)
              ->whereIn('model', ['D03B UNB','D03B UPB','D55L/D26A/D74A/D03B UPB','D26A/D55L/D03B']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -475,6 +501,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('qty_min', '>=', 0) // Pastikan qty_min lebih dari atau sama dengan 0
                 ->whereColumn('qty_actual', '<', 'qty_min') // Hanya data dengan qty_actual lebih kecil dari qty_min
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)
@@ -490,6 +517,7 @@ public function getPlanningLineB3(Request $request)
                 ->where('home_line', 'INHOUSE')
                 ->whereIn('model', ['KS']) // Pastikan bisa membaca variasi nama
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get();
     
             return DataTables::of($data)
@@ -505,6 +533,7 @@ public function getPlanningLineB3(Request $request)
              ->whereIn('model', ['KS']) // Pastikan bisa membaca variasi nama
                 ->whereColumn('qty_actual', '>=', 'qty_min') // Hanya data dengan qty_actual >= qty_min
                 ->select('job_no', 'part_name', 'part_no','part_no2', 'model', 'customer', 'qty_min', 'qty_actual', 'qty_kanban', 'home_line', 'category')
+                ->orderBy('updated_at', 'desc')
                 ->get(); // Mengambil data setelah filter diterapkan
     
             return DataTables::of($data)

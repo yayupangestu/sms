@@ -1165,12 +1165,13 @@
 
                     $('#detailModal .modal-body').html(countBox);
 
-                    partDetailsDataTable = $('#partDetailsTable').DataTable({
+                partDetailsDataTable = $('#partDetailsTable').DataTable({
                         processing: true,
                         serverSide: true,
                         pageLength: 10,
                         autoWidth: false,
                         destroy: true,
+                        order: [[6, 'desc']], // terbaru dulu berdasarkan created_at
                         ajax: {
                             url: "{{ route('dashboardrmstok.getPartDetails') }}",
                             data: function (d) {
@@ -1329,7 +1330,6 @@
                     data.forEach(item => {
                         let row = `
                         <tr style="vertical-align: middle;">
-                            <td><span class="badge bg-light text-dark">${item.uniqNo}</span></td>
                             <td>${item.part_no}</td>
                             <td>${item.spec}</td>
                             <td style="font-weight: 700; color: var(--emerald-good);">${item.actual}</td>

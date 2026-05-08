@@ -8,6 +8,8 @@ use App\Models\ScanOutStmp;
 use App\Models\LineStoreStok;
 use App\Models\TagLabelSubcont;
 use App\Models\TabelStokSbc;
+use App\Models\MpsPlanning;
+use App\Models\TabelBom;
 class ScanBpsPartController extends Controller
 {
     public function index()
@@ -151,4 +153,38 @@ class ScanBpsPartController extends Controller
 
 
 
+    public function getMpsPlannings(Request $request)
+    {
+        $date = $request->query('date');
+
+        if (!$date) {
+            return response()->json(['success' => false, 'message' => 'Date is required']);
+        }
+
+        $plannings = MpsPlanning::whereDate('date_plan', $date)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $plannings
+        ]);
+    }
+
+    public function getBomDataByJobNo(Request $request)
+    {
+        $jobNo = $request->query('job_no');
+
+        if (!$jobNo) {
+            return response()->json(['success' => false, 'message' => 'Job No is required']);
+        }
+
+        $bomData = TabelBom::where('job_no', $jobNo)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $bomData
+        ]);
+    }
 }
