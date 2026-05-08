@@ -1816,6 +1816,52 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/relay/activate3', [ScanRak15OutController::class, 'activateRelayOut3'])->name('scanraklimabelasout.activateRelayOut3');
         Route::get('/relay/deactivate3', [ScanRak15OutController::class, 'deactivateRelayOut3'])->name('scanraklimabelasout.deactivateRelayOut3');
     });
+
+
+
+
+
+
+    Route::group(['prefix' => 'masterliststr'], function () {
+        Route::get('/', 'MasterListStoreRoom@index')->name('masterliststr.index');
+        Route::get('/list', 'MasterListStoreRoom@list')->name('masterliststr.list');
+        Route::post('/create', 'MasterListStoreRoom@store')->name('masterliststr.store');
+        Route::get('/edit', 'MasterListStoreRoom@edit')->name('masterliststr.edit');
+        Route::post('/update', 'MasterListStoreRoom@update')->name('masterliststr.update');
+        Route::post('/delete', 'MasterListStoreRoom@destroy')->name('masterliststr.destroy');
+        Route::get('/export', 'MasterListStoreRoom@export')->name('masterliststr.export');
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/', 'StrCategoryController@index')->name('category.index');
+        Route::get('/list', 'StrCategoryController@list')->name('category.list');
+        Route::post('/create', 'StrCategoryController@store')->name('category.store');
+        Route::get('/edit', 'StrCategoryController@edit')->name('category.edit');
+        Route::post('/update', 'StrCategoryController@update')->name('category.update');
+        Route::post('/delete', 'StrCategoryController@destroy')->name('category.destroy');
+
+    });
+
+    Route::group(['prefix' => 'uom'], function () {
+        Route::get('/', 'StrUoMController@index')->name('uom.index');
+        Route::get('/list', 'StrUoMController@list')->name('uom.list');
+        Route::post('/create', 'StrUoMController@store')->name('uom.store');
+        Route::get('/edit', 'StrUoMController@edit')->name('uom.edit');
+        Route::post('/update', 'StrUoMController@update')->name('uom.update');
+        Route::post('/delete', 'StrUoMController@destroy')->name('uom.destroy');
+
+    });
+
+    Route::group(['prefix' => 'supplier'], function () {
+        Route::get('/', 'StrSuplaierController@index')->name('supplier.index');
+        Route::get('/list', 'StrSuplaierController@list')->name('supplier.list');
+        Route::post('/create', 'StrSuplaierController@store')->name('supplier.store');
+        Route::get('/edit', 'StrSuplaierController@edit')->name('supplier.edit');
+        Route::post('/update', 'StrSuplaierController@update')->name('supplier.update');
+        Route::post('/delete', 'StrSuplaierController@destroy')->name('supplier.destroy');
+        Route::get('users/export', 'StrSuplaierController@export')->name('supplier.export');
+    });
+
 });
 
 

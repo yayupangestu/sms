@@ -38,16 +38,16 @@
     }
 
     .main-sidebar .nav-icon {
-        font-size: 20px !important;
+        font-size: 24px !important;
         margin-right: 12px !important;
-        color: #6B7280 !important;
-        /* Gray 500 */
+        color: rgb(167, 192, 192) !important;
+        text-shadow: 6px 5px 7px #000000;
         transition: all 0.3s ease !important;
     }
 
     /* Category Headers */
     .main-sidebar .nav-header {
-        font-size: 11px !important;
+        font-size: 15px !important;
         font-weight: 700;
         letter-spacing: 1.5px;
         color: #4F46E5 !important;
@@ -1831,7 +1831,7 @@
                                     class="nav-link {{ Request::is('planninglineb3') ? 'active' : '' }}">
                                     <i class="nav-icon ph-duotone ph-calendar-check"></i>
                                     <p>
-                                        Planning Line Stamping
+                                        Planning Stamping
                                     </p>
                                 </a>
                             </li>
@@ -1865,7 +1865,7 @@
                                     class="nav-link {{ Request::is('boardd26') ? 'active' : '' }}">
                                     <i class="nav-icon ph-duotone ph-clipboard-text"></i>
                                     <p>
-                                        BOARDD26 TMMIN
+                                        Board TMMIN
                                         {{-- <i class="ph-light ph-archive"></i> --}}
                                     </p>
                                 </a>
@@ -1877,7 +1877,7 @@
                                     class="nav-link {{ Request::is('boardd26adm') ? 'active' : '' }}">
                                     <i class="nav-icon ph-duotone ph-clipboard-text"></i>
                                     <p>
-                                        BOARDD26 ADM KAP-1
+                                        Board KAP-1
                                         {{-- <i class="ph-light ph-archive"></i> --}}
                                     </p>
                                 </a>
@@ -1889,7 +1889,7 @@
                                     class="nav-link {{ Request::is('boardd26adm2') ? 'active' : '' }}">
                                     <i class="nav-icon ph-duotone ph-clipboard-text"></i>
                                     <p>
-                                        BOARDD26 ADM KAP-2
+                                        Board KAP-2
                                         {{-- <i class="ph-light ph-archive"></i> --}}
                                     </p>
                                 </a>
@@ -1901,7 +1901,7 @@
                                     class="nav-link {{ Request::is('boardadmp4') ? 'active' : '' }}">
                                     <i class="nav-icon ph-duotone ph-clipboard-text"></i>
                                     <p>
-                                        BOARDD26 ADM P4
+                                        Board ADM P4
                                         {{-- <i class="ph-light ph-archive"></i> --}}
                                     </p>
                                 </a>
@@ -2196,9 +2196,9 @@
                     </li>
                     {{-- RM Standart Part --}}
                     <li
-                        class="nav-item {{ Request::is('materialnut', 'standartnut', 'supplierrmnut', 'innut', 'scan2', 'scan3', 'scan4', 'stoknut', 'dashboardnut') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('materialnut*', 'standartnut*', 'supplierrmnut*', 'innut*', 'scan2*', 'scan3*', 'scan4*', 'stoknut*', 'dashboardnut*', 'tracesswnut*', 'scanraksatu*') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('materialnut', 'standartnut', 'supplierrmnut', 'innut', 'scan2', 'scan3', 'scan4', 'stoknut', 'dashboardnut') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('materialnut*', 'standartnut*', 'supplierrmnut*', 'innut*', 'scan2*', 'scan3*', 'scan4*', 'stoknut*', 'dashboardnut*', 'tracesswnut*', 'scanraksatu*') ? 'active' : '' }}">
                             <i class="nav-icon ph-duotone ph-package"></i>
                             <p>
                                 RM S/P
@@ -2208,130 +2208,88 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('supplierrmnut.index') }}"
-                                    class="nav-link {{ Request::is('supplierrmnut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Suplaier Nut
-                                    </p>
+                                    class="nav-link {{ Request::is('supplierrmnut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-truck"></i>
+                                    <p>Supplier Nut</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('materialnut.index') }}"
-                                    class="nav-link {{ Request::is('materialnut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Material NUT
-                                    </p>
+                                    class="nav-link {{ Request::is('materialnut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-cube"></i>
+                                    <p>Material NUT</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('standartnut.index') }}"
-                                    class="nav-link {{ Request::is('standartnut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Standart NUT
-                                    </p>
+                                    class="nav-link {{ Request::is('standartnut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-clipboard-text"></i>
+                                    <p>Standart NUT</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('innut.index') }}"
-                                    class="nav-link {{ Request::is('innut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        IN NUT
-                                    </p>
+                                    class="nav-link {{ Request::is('innut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-arrow-square-in"></i>
+                                    <p>IN NUT</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scan2.index') }}"
-                                    class="nav-link {{ Request::is('scan2') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Scan_IN
-                                    </p>
+                                    class="nav-link {{ Request::is('scan2*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-barcode"></i>
+                                    <p>Scan IN</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scan3.index') }}"
-                                    class="nav-link {{ Request::is('scan3') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Scan_OUT
-                                    </p>
+                                    class="nav-link {{ Request::is('scan3*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-barcode"></i>
+                                    <p>Scan OUT</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scan4.index') }}"
-                                    class="nav-link {{ Request::is('scan4') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Scan Keddatangan
-                                    </p>
+                                    class="nav-link {{ Request::is('scan4*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-package"></i>
+                                    <p>Scan Kedatangan</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('tracesswnut.index') }}"
-                                    class="nav-link {{ Request::is('tracesswnut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        TRACE SSW
-                                    </p>
+                                    class="nav-link {{ Request::is('tracesswnut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-magnifying-glass"></i>
+                                    <p>Trace SSW</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stoknut.index') }}"
-                                    class="nav-link {{ Request::is('stoknut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        TRACE SSW
-                                    </p>
+                                    class="nav-link {{ Request::is('stoknut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-stack"></i>
+                                    <p>Stok Nut</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scanraksatu.index') }}"
-                                    class="nav-link {{ Request::is('scanraksatu') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Scan Rak Satu
-                                    </p>
+                                    class="nav-link {{ Request::is('scanraksatu*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-browsers"></i>
+                                    <p>Scan Rak Satu</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('dashboardnut.index') }}"
-                                    class="nav-link {{ Request::is('dashboardnut') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Dashboard NUT
-                                    </p>
+                                    class="nav-link {{ Request::is('dashboardnut*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-chart-pie-slice"></i>
+                                    <p>Dashboard NUT</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
                     {{-- LINE BLANK SECTION --}}
                     <li
-                        class="nav-item {{ Request::is('blankstok', 'scaninblank', 'scanoutblank', 'taglabelblank', 'taglabel2', 'datablank', 'dashboardblank') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('blankstok*', 'scaninblank*', 'scanoutblank*', 'taglabel*', 'datablank*', 'dashboardblank*', 'scanoutblank2*', 'dashboardplanningblank*') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('blankstok', 'scaninblank', 'scanoutblank', 'taglabelblank', 'taglabel2', 'datablank', 'dashboardblank') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('blankstok*', 'scaninblank*', 'scanoutblank*', 'taglabel*', 'datablank*', 'dashboardblank*', 'scanoutblank2*', 'dashboardplanningblank*') ? 'active' : '' }}">
                             <i class="nav-icon ph-duotone ph-squares-four"></i>
                             <p>
                                 Line Blank
@@ -2341,101 +2299,65 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('datablank.index') }}"
-                                    class="nav-link {{ Request::is('datablank') ? 'active' : ''}}">
-                                    <i class="nav-icon fas fa fa-pencil"></i>
-                                    <p>
-                                        DB Part Blank
-                                    </p>
+                                    class="nav-link {{ Request::is('datablank*') ? 'active' : ''}}">
+                                    <i class="nav-icon ph-duotone ph-database"></i>
+                                    <p>DB Part Blank</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('blankstok.index') }}"
-                                    class="nav-link {{ Request::is('blankstok') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Tabel Blank Stok (DB)
-                                    </p>
+                                    class="nav-link {{ Request::is('blankstok*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-stack"></i>
+                                    <p>Tabel Blank Stok (DB)</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('dashboardblank.index') }}"
-                                    class="nav-link {{ Request::is('dashboardblank') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Dashboard Blank
-                                    </p>
+                                    class="nav-link {{ Request::is('dashboardblank*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-chart-pie"></i>
+                                    <p>Dashboard Blank</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scaninblank.index') }}"
-                                    class="nav-link {{ Request::is('scaninblank') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-fill ph-scan"></i>
-                                    <p>
-                                        Scan In Material
-                                    </p>
+                                    class="nav-link {{ Request::is('scaninblank*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-barcode"></i>
+                                    <p>Scan In Material</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scanoutblank.index') }}"
-                                    class="nav-link {{ Request::is('scanoutblank') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-fill ph-scan"></i>
-                                    <p>
-                                        Scan Out
-                                    </p>
+                                    class="nav-link {{ Request::is('scanoutblank*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-barcode"></i>
+                                    <p>Scan Out</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scanoutblank2.index') }}"
-                                    class="nav-link {{ Request::is('scanoutblank2') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-fill ph-scan"></i>
-                                    <p>
-                                        Scan Out 2
-                                    </p>
+                                    class="nav-link {{ Request::is('scanoutblank2*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-barcode"></i>
+                                    <p>Scan Out 2</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('dashboardplanningblank.index') }}"
-                                    class="nav-link {{ Request::is('dashboardplanningblank') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Dashboard Proses Blank
-                                    </p>
+                                    class="nav-link {{ Request::is('dashboardplanningblank*') ? 'active' : '' }}">
+                                    <i class="nav-icon ph-duotone ph-chalkboard"></i>
+                                    <p>Dashboard Proses Blank</p>
                                 </a>
                             </li>
-                        </ul>
-
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('taglabel2.index') }}"
-                                    class="nav-link {{ Request::is('taglabel2') ? 'active' : ''}}">
-                                    <i class="nav-icon fas fa fa-pencil"></i>
-                                    <p>
-                                        Tag Label 2
-                                    </p>
+                                    class="nav-link {{ Request::is('taglabel2*') ? 'active' : ''}}">
+                                    <i class="nav-icon ph-duotone ph-tag"></i>
+                                    <p>Tag Label 2</p>
                                 </a>
                             </li>
-                        </ul>
-
-                        <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('taglabel3.index') }}"
-                                    class="nav-link {{ Request::is('taglabel3') ? 'active' : ''}}">
-                                    <i class="nav-icon fas fa fa-pencil"></i>
-                                    <p>
-                                        Tag Label 3
-                                    </p>
+                                    class="nav-link {{ Request::is('taglabel3*') ? 'active' : ''}}">
+                                    <i class="nav-icon ph-duotone ph-tag"></i>
+                                    <p>Tag Label 3</p>
                                 </a>
                             </li>
                         </ul>
@@ -2447,7 +2369,7 @@
                             class="nav-link {{ Request::is('scaninstmp', 'scanoutstmp', 'kanbanstmp', 'kanbanstmpc1', 'kanbanstmpc2') ? 'active' : '' }}">
                             <i class="nav-icon ph-duotone ph-factory"></i>
                             <p>
-                                Stamping Line
+                                STAMPING LINE
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -2473,17 +2395,17 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('scanreturnrm.index') }}"
-                                    class="nav-link {{ Request::is('scanreturnrm') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-fill ph-scan"></i>
-                                    <p>
-                                        Scan Return RM (B3,C1,C2)
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
+                        <!-- <ul class="nav nav-treeview">
+                                                                                                                                                        <li class="nav-item ml-3">
+                                                                                                                                                            <a href="{{ route('scanreturnrm.index') }}"
+                                                                                                                                                                class="nav-link {{ Request::is('scanreturnrm') ? 'active' : '' }}">
+                                                                                                                                                                <i class="nav-icon ph-fill ph-scan"></i>
+                                                                                                                                                                <p>
+                                                                                                                                                                    Scan Return RM (B3,C1,C2)
+                                                                                                                                                                </p>
+                                                                                                                                                            </a>
+                                                                                                                                                        </li>
+                                                                                                                                                    </ul> -->
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('dashboardplanning.index') }}"
@@ -2496,62 +2418,6 @@
                                 </a>
                             </li>
                         </ul>
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('prosesqr1.index') }}"
-                                    class="nav-link {{ Request::is('prosesqr1') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Trace
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmp.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmp') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP B3
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc1.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc1') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C1
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc2.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc2') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C2
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                    </li>
-                    {{-- STAMPING LINE STAMPING B1,B2 SECTION --}}
-                    <li
-                        class="nav-item {{ Request::is('dashboardplanningb12', 'scaninstmpB12', 'scanoutstmp', 'kanbanstmpb1', 'prosesqr1', 'scanreturnrm', 'kanbanstmpb2', 'kanbanstmpc2', ) ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('scaninstmpb12', 'scanoutstmp', 'kanbanstmp', 'kanbanstmpc1', 'kanbanstmpc2') ? 'active' : '' }}">
-                            <i class="nav-icon ph-duotone ph-factory"></i>
-                            <p>
-                                Stamping Line
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scaninstmpb12.index') }}"
@@ -2586,62 +2452,6 @@
                                 </a>
                             </li>
                         </ul>
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('prosesqr1.index') }}"
-                                    class="nav-link {{ Request::is('prosesqr1') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Trace
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmp.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmp') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP B3
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc1.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc1') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C1
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc2.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc2') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C2
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                    </li>
-                    {{-- STAMPING LINE STAMPING A1,A2 SECTION --}}
-                    <li
-                        class="nav-item {{ Request::is('dashboardplanninga12', 'scaninstmpa12', 'scanoutstmp', 'kanbanstmpb1', 'prosesqr1', 'scanreturnrm', 'kanbanstmpb2', 'kanbanstmpc2', ) ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('scaninstmpa12', 'scanoutstmp', 'kanbanstmp', 'kanbanstmpc1', 'kanbanstmpc2') ? 'active' : '' }}">
-                            <i class="nav-icon ph-duotone ph-factory"></i>
-                            <p>
-                                Stamping Line A
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scaninstmpa12.index') }}"
@@ -2676,69 +2486,13 @@
                                 </a>
                             </li>
                         </ul>
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('prosesqr1.index') }}"
-                                    class="nav-link {{ Request::is('prosesqr1') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Trace
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmp.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmp') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP B3
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc1.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc1') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C1
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                        {{-- <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('kanbanstmpc2.index') }}"
-                                    class="nav-link {{ Request::is('kanbanstmpc2') ? 'active' : '' }}">
-                                    <i class="nav-icon ph-duotone ph-pencil-simple-line"></i>
-                                    <p>
-                                        Crate KNB STMP C2
-                                    </p>
-                                </a>
-                            </li>
-                        </ul> --}}
-                    </li>
-                    {{-- STAMPING LINE STAMPING TRANSFERS SECTION --}}
-                    <li
-                        class="nav-item {{ Request::is('dashboardplanningatransfers', 'scaninstmptransfers', 'scanoutstmp', 'kanbanstmpb1', 'prosesqr1', 'scanreturnrm', 'kanbanstmpb2', 'kanbanstmpc2', ) ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('scaninstmptransfers', 'scanoutstmp', 'kanbanstmp', 'kanbanstmpc1', 'kanbanstmpc2') ? 'active' : '' }}">
-                            <i class="nav-icon ph-duotone ph-factory"></i>
-                            <p>
-                                Stamping Transfers
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('scaninstmptransfers.index') }}"
                                     class="nav-link {{ Request::is('scaninstmptransfers') ? 'active' : '' }}">
                                     <i class="nav-icon ph-fill ph-scan"></i>
                                     <p>
-                                        Scan IN TRANSFERS
+                                        Scan In Transfers
                                     </p>
                                 </a>
                             </li>
@@ -2749,7 +2503,7 @@
                                     class="nav-link {{ Request::is('scanoutstmp') ? 'active' : '' }}">
                                     <i class="nav-icon ph-fill ph-scan"></i>
                                     <p>
-                                        Scan OUT TRANSFERS
+                                        Out Transfers
                                     </p>
                                 </a>
                             </li>
@@ -2760,7 +2514,7 @@
                                     class="nav-link {{ Request::is('dashboardplanningatransfers') ? 'active' : '' }}">
                                     <i class="nav-icon ph-bold ph-chalkboard"></i>
                                     <p>
-                                        Dashboard TRANSFERS
+                                        Dashboard Transfers
                                         {{-- <i class="ph-light ph-archive"></i> --}}
                                     </p>
                                 </a>
@@ -2812,83 +2566,83 @@
                         </ul> --}}
                     </li>
                     {{-- LINE STAMPING REPORT --}}
-                    <li
-                        class="nav-item {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'menu-open' : '' }}">
-                        <a href="#"
-                            class="nav-link {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'active' : '' }}">
-                            <i class="nav-icon ph-duotone ph-file-text"></i>
-                            <p>
-                                Report & LKH Stamping
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('lkhb3.index') }}"
-                                    class="nav-link {{ Request::is('lkhb3') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        LKH B3
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('lkhc1.index') }}"
-                                    class="nav-link {{ Request::is('lkhc1') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        LKH C1
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('lkhc2.index') }}"
-                                    class="nav-link {{ Request::is('lkhc2') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        LKH C2
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('reportb3.index') }}"
-                                    class="nav-link {{ Request::is('reportb3') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Report B3
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('reportc1.index') }}"
-                                    class="nav-link {{ Request::is('reportc1') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Report C1
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item ml-3">
-                                <a href="{{ route('reportc2.index') }}"
-                                    class="nav-link {{ Request::is('reportc2') ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa fa-tasks"></i>
-                                    <p>
-                                        Report C2
-                                    </p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                    <!-- <li
+                                                                                                                            class="nav-item {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'menu-open' : '' }}">
+                                                                                                                            <a href="#"
+                                                                                                                                class="nav-link {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'active' : '' }}">
+                                                                                                                                <i class="nav-icon ph-duotone ph-file-text"></i>
+                                                                                                                                <p>
+                                                                                                                                    Report & LKH Stamping
+                                                                                                                                    <i class="right fas fa-angle-left"></i>
+                                                                                                                                </p>
+                                                                                                                            </a>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('lkhb3.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('lkhb3') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            LKH B3
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('lkhc1.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('lkhc1') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            LKH C1
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('lkhc2.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('lkhc2') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            LKH C2
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('reportb3.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('reportb3') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            Report B3
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('reportc1.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('reportc1') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            Report C1
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                            <ul class="nav nav-treeview">
+                                                                                                                                <li class="nav-item ml-3">
+                                                                                                                                    <a href="{{ route('reportc2.index') }}"
+                                                                                                                                        class="nav-link {{ Request::is('reportc2') ? 'active' : '' }}">
+                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                        <p>
+                                                                                                                                            Report C2
+                                                                                                                                        </p>
+                                                                                                                                    </a>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                        </li> -->
                     {{-- LINE STORE SECTION --}}
                     <li
                         class="nav-item {{ Request::is('scaninlsrepair', 'linestorestok', 'linestoreindex', 'linestoreindex2', 'linestoreupload', 'scaninls2', 'dashboard1ls', 'tabelstoksbc', 'scanoutls') ? 'menu-open' : '' }}">
@@ -3426,6 +3180,65 @@
                             </li>
                         </ul>
                     </li> --}}
+
+
+                    <li class="nav-header">STORE ROOM SYSTEM</li>
+                    <li
+                        class="nav-item {{ Request::is('masterliststr', 'category', 'uom', 'supplier') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ Request::is('masterliststr', 'category', 'uom', 'supplier') ? 'active' : '' }}">
+                            <i class="nav-icon ph-duotone ph-factory"></i>
+                            <p>
+                                MASTER DATA
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('masterliststr.index') }}"
+                                    class="nav-link {{ Request::is('masterliststr', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-box-open"></i>
+                                    <p>
+                                        Item List
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('uom.index') }}"
+                                    class="nav-link {{ Request::is('uom', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        UoM ( Unit )
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('category.index') }}"
+                                    class="nav-link {{ Request::is('category', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Category
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('supplier.index') }}"
+                                    class="nav-link {{ Request::is('supplier', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-truck-moving"></i>
+                                    <p>
+                                        Supplier
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-header">CONFIGURATIONS</li>
                     <li class="nav-item">
                         <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('user') ? 'active' : '' }}">
