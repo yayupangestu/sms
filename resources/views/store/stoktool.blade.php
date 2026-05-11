@@ -2,259 +2,21 @@
 
 @section('content')
     <style>
-        /* Background */
-        .content-wrapper {
-            background-color: #f1f5f9 !important;
-        }
-
-        /* Header Title */
-        .content-header h1 {
-            color: #0f172a;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
-
-        /* Card Modern */
-        .card {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            background: #ffffff;
-            margin-bottom: 2rem;
-        }
-
-        /* Card Header */
-        .card-header {
-            background: linear-gradient(135deg, #334155 0%, #0f172a 100%) !important;
-            color: #ffffff !important;
-            border-bottom: none;
-            padding: 18px 22px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-header .card-title {
-            font-weight: 700;
-            font-size: 1.15rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 0;
-            color: #ffffff !important;
-        }
-
-        /* Card Tools */
-        .card-tools {
-            margin-left: auto;
-            display: flex;
-            gap: 10px;
-        }
-
-        /* Buttons */
-        .btn {
-            border-radius: 10px !important;
-            font-weight: 600;
-            padding: 8px 16px;
-            transition: all 0.2s ease-in-out;
-        }
-
-        .btn-warning {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            border: none;
-            color: #fff !important;
-        }
-
-        .btn-warning:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 18px rgba(245, 158, 11, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border: none;
-            color: #fff !important;
-        }
-
-        .btn-success:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 8px 18px rgba(16, 185, 129, 0.3);
-        }
-
-        /* Table */
-        .table {
-            margin-bottom: 0;
-            border-collapse: separate;
-            border-spacing: 0;
-            width: 100%;
-        }
-
-        .table thead th {
-            background-color: #1e293b !important;
-            color: #f8fafc !important;
-            border: none !important;
-            font-weight: 700;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 16px 14px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .table tbody td {
-            padding: 15px 14px;
-            font-size: 0.9rem;
-            color: #334155;
-            border-top: 1px solid #e2e8f0 !important;
-            vertical-align: middle;
-        }
-
-        .table-hover tbody tr:hover {
-            background-color: #f8fafc !important;
-            transition: 0.2s;
-        }
-
-        /* Zebra Stripe */
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: #ffffff;
-        }
-
-        .table-striped tbody tr:nth-of-type(even) {
-            background-color: #f9fafb;
-        }
-
-        /* Centered */
         .centered-text {
             text-align: center;
         }
 
-        /* Minimal and Actual Style */
-        .minimal {
-            background-color: #fef9c3 !important;
-            color: #854d0e !important;
-            font-weight: 700;
-            border-radius: 10px;
-            padding: 6px 10px;
-            display: inline-block;
-            border: 1px solid #fde68a;
+        tr:nth-child(even) {
+            background-color:
+                #e6e6e6
         }
 
         .actual {
-            background-color: #dcfce7 !important;
-            color: #166534 !important;
-            font-weight: 700;
-            border-radius: 10px;
-            padding: 6px 10px;
-            display: inline-block;
-            border: 1px solid #bbf7d0;
+            background-color: rgb(0, 255, 64);
         }
 
-        /* Table Responsive */
-        .table-responsive {
-            padding: 10px;
-        }
-
-        /* DataTables Search */
-        .dataTables_filter {
-            text-align: right !important;
-            padding: 12px 20px;
-        }
-
-        .dataTables_filter label {
-            font-weight: 700;
-            color: #334155;
-        }
-
-        .dataTables_filter input {
-            border-radius: 10px !important;
-            border: 1px solid #cbd5e1 !important;
-            padding: 8px 14px !important;
-            width: 250px !important;
-            margin-left: 8px;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .dataTables_filter input:focus {
-            border-color: #4f46e5 !important;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-        }
-
-        /* Pagination */
-        .dataTables_paginate {
-            text-align: right !important;
-            padding: 12px 20px;
-        }
-
-        .pagination {
-            justify-content: flex-end !important;
-        }
-
-        .page-link {
-            border-radius: 10px !important;
-            margin: 0 3px;
-            font-weight: 700;
-            border: 1px solid #e2e8f0 !important;
-            color: #334155 !important;
-        }
-
-        .page-item.active .page-link {
-            background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
-            border: none !important;
-            color: white !important;
-        }
-
-        /* Modal Modern */
-        .modal-content {
-            border-radius: 16px;
-            border: none;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, #334155 0%, #0f172a 100%);
-            color: white;
-            border-bottom: none;
-            padding: 16px 20px;
-        }
-
-        .modal-title {
-            font-weight: 800;
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
-        .modal-footer {
-            background: #f8fafc;
-            border-top: 1px solid #e2e8f0;
-            padding: 15px 20px;
-        }
-
-        /* Form Control */
-        .form-control {
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            padding: 10px 12px;
-        }
-
-        .form-control:focus {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-        }
-
-        .th-minimal {
-            background: #facc15 !important;
-            color: #1e293b !important;
-            font-weight: 800;
-        }
-
-        .th-actual {
-            background: #22c55e !important;
-            color: #ffffff !important;
-            font-weight: 800;
+        .minimal {
+            background-color: yellow;
         }
     </style>
 
@@ -262,7 +24,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Stok Items GAS ASI-1</h1>
+                    <h1 class="m-0">Stok Items Tool & Insert ASI-1</h1>
                 </div>
                 <div class="col-sm-6">
 
@@ -275,40 +37,41 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card" id="CardHead">
-                        <div class="card-header" style="background-color:   rgb(126, 144, 144)">
-                            <h3 class="card-title">
-                                <i class="fas fa-store"></i>
-                                List Stok Item Gas
-                            </h3>
+                    <div class="card">
+                        <div class="card-header" style="background-color:  rgb(126, 144, 144)">
+                            <h3 class="card-title">List Data Items Tool & Insert</h3>
                             <div class="card-tools">
                                 <button class="btn btn-warning btn-sm" id="btn_add"><i class="fa fa-plus"></i> Add</button>
-                                <a href="{{ route('stokgas.export')}}" class="btn btn-success btn-sm"><i
-                                        class=" fas fa-file-excel">Export Excel</i></a>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <div class="card-body" style="font-family: 'Times New Roman', Times, serif">
-                                <table id="example1" class="table  table-bordered table-striped; centered-text">
-                                    <thead class="table" style="background-color:  rgb(126, 144, 144)">
-                                        <tr>
-                                            <th width="50">No</th>
-                                            <th>Items Name</th>
-                                            <th width="100">Category</th>
-                                            <th class="th-minimal" width="100">Minimal Stok</th>
-                                            <th class="th-actual" width="100">Actual Stok</th>
-                                            <th class="centered-text" style="text-align: center" width="100">UoM</th>
-                                            <th width="50">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
+                                <a href="{{ route('stokti.export')}}" class="btn btn-success btn-sm"><i
+                                        class="fa fas fa-file-excel">Export Excel</i></a>
+                                {{-- <button class="btn btn-success btn-sm" name="button" value="#" type="submit"><i
+                                        class="fa fa-file-excel"></i> Export XCEL</button> --}}
                             </div>
                         </div>
                     </div>
+
+
+                </div>
+                <div class="card-body" style="font-family: 'Times New Roman', Times, serif">
+                    <table id="example1" class="table  table-bordered table-striped; centered-text">
+                        <thead class="table" style="background-color:  rgb(126, 144, 144)">
+                            <tr>
+                                <th width="50">No</th>
+                                <th>Items Name</th>
+                                <th width="100">Category</th>
+                                <th class="minimal" width="100">MinimalStok</th>
+                                <th class="actual" width="100">Actual Stok</th>
+                                <th class="centered-text" style="text-align: center" width="100">UoM</th>
+                                <th width="50">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -316,8 +79,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="title1">Add Item</h4>
-                    <h4 class="modal-title" id="title2">Edit Item</h4>
+                    <h4 class="modal-title" id="title1">Add Items</h4>
+                    <h4 class="modal-title" id="title2">Edit Items</h4>
                     <button type="button" class="close; btn btn-secondary" data-dismiss="modal" aria-label="Close">Close
                         {{-- <span aria-hidden="true">&times;</span> --}}
                     </button>
@@ -332,9 +95,8 @@
                                 required>
                                 <option value="" selected>- pilih -</option>
                                 @foreach ($master_list_strs as $barang)
-                                    <option style="text-align: center" value="{{ $barang->id }}">{{ $barang->name }} /
-                                        {{ $barang->category}}
-                                    </option>
+                                    <option style="text-align: center" value="{{ $barang->id }}">{{ $barang->name }}
+                                        /{{ $barang->category}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -343,7 +105,8 @@
                         <div class="col-sm-9">
                             <select style="width: 100%;" id="category" class="form-control select2" required>
                                 <option value="" selected>- pilih -</option>
-                                <option value="GAS">GAS</option>
+                                <option value="TOOL & INSERT">TOOL & INSERT</option>
+
                             </select>
                         </div>
 
@@ -409,7 +172,7 @@
                 destroy: true,
                 pageLength: 10,
                 ajax: {
-                    url: "{{ route('stokgas.list') }}"
+                    url: "{{ route('stokti.list') }}"
                 },
                 columns: [{
                     data: null,
@@ -481,7 +244,7 @@
             var id = $(this).data('id');
             $.ajax({
                 type: 'GET',
-                url: "{{route('stokgas.edit')}}",
+                url: "{{route('stokti.edit')}}",
                 data: {
                     id: id,
                     _token: '{{csrf_token()}}'
@@ -525,7 +288,7 @@
             if (validasi()) {
                 $.ajax({
                     type: 'POST',
-                    url: "{{route('stokgas.store')}}",
+                    url: "{{route('stokti.store')}}",
                     data: {
                         item_id: item_id.value,
                         category: category.value,
@@ -553,7 +316,7 @@
             if (validasi()) {
                 $.ajax({
                     type: 'POST',
-                    url: "{{route('stokgas.update')}}",
+                    url: "{{route('stokti.update')}}",
                     data: {
                         id: id.value,
                         item_id: item_id.value,
@@ -583,13 +346,13 @@
 
         $(document).ready(function () {
             $.ajax({
-                url: '/check-stock4',
+                url: '/check-stock5',
                 type: 'GET',
                 success: function (response) {
                     if (response.status === 'error') {
                         var message = response.message + '\n';
                         response.items.forEach(function (item) {
-                            message += '- ' + item.name + '\n';
+                            message += '& ' + item.name + '\n';
                         });
                         SweetAlert.fire({
                             icon: 'info',
@@ -633,7 +396,7 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: 'POST',
-                        url: "{{route('stokgas.destroy')}}",
+                        url: "{{route('stokti.destroy')}}",
                         data: { id: id, _token: '{{csrf_token()}}' },
                         dataType: 'json',
                         success: function (result) {

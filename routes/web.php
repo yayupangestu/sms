@@ -1918,6 +1918,27 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokGasController@export')->name('stokgas.export');
     });
 
+    Route::group(['prefix' => 'stokti'], function () {
+        Route::get('/', 'StrStokToolController@index')->name('stokti.index');
+        Route::get('/list', 'StrStokToolController@list')->name('stokti.list');
+        Route::post('/create', 'StrStokToolController@store')->name('stokti.store');
+        Route::get('/edit', 'StrStokToolController@edit')->name('stokti.edit');
+        Route::post('/update', 'StrStokToolController@update')->name('stokti.update');
+        Route::post('/delete', 'StrStokToolController@destroy')->name('stokti.destroy');
+        Route::get('users/export', 'StrStokToolController@export')->name('stokti.export');
+    });
+
+    Route::group(['prefix' => 'stokcuptip'], function () {
+        Route::get('/', 'StrStokCuptipController@index')->name('stokcuptip.index');
+        Route::get('/list', 'StrStokCuptipController@list')->name('stokcuptip.list');
+        Route::post('/create', 'StrStokCuptipController@store')->name('stokcuptip.store');
+        Route::get('/edit', 'StrStokCuptipController@edit')->name('stokcuptip.edit');
+        Route::post('/update', 'StrStokCuptipController@update')->name('stokcuptip.update');
+        Route::post('/delete', 'StrStokCuptipController@destroy')->name('stokcuptip.destroy');
+        Route::get('users/export', 'StrStokCuptipController@export')->name('stokcuptip.export');
+    });
+
+
 
 });
 
