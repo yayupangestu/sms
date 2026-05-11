@@ -1976,6 +1976,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'exportall'], function () {
+        Route::get('/', 'StrExportController@index')->name('exportall.index');
+        Route::get('/export', 'StrExportController@export')->name('exportall.export');
+        Route::get('/export2', 'StrExportController@export2')->name('exportall.export2');
+        Route::get('/export3', 'StrExportController@export3')->name('exportall.export3');
+        // Route::post('/delete', 'StrExportController@destroy')->name('spbb3.destroy');
+    });
+
 
 });
 
