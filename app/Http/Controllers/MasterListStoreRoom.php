@@ -38,7 +38,9 @@ class MasterListStoreRoom extends Controller
         $barang->category = $request->category;
         $barang->description = $request->description;
         $barang->item_code = $request->item_code;
-        $barang->price = $request->price;
+        $price = str_replace('.', '', $request->price ?? '0'); // Hapus pemisah ribuan (titik)
+        $price = str_replace(',', '.', $price); // Ganti pemisah desimal (koma) jadi titik
+        $barang->price = $price;
         $barang->createby = auth()->user()->id;
         $query = $barang->save();
         if ($query) {
@@ -82,7 +84,9 @@ class MasterListStoreRoom extends Controller
         $data['category'] = $request->category;
         $data['description'] = $request->description;
         $data['item_code'] = $request->item_code;
-        $data['price'] = $request->price;
+        $price = str_replace('.', '', $request->price ?? '0'); // Hapus pemisah ribuan (titik)
+        $price = str_replace(',', '.', $price); // Ganti pemisah desimal (koma) jadi titik
+        $data['price'] = $price;
         $data['updatedby'] = auth()->user()->id;
         $query = MasterListStr::where('id', $request->id)->update($data);
         if ($query) {

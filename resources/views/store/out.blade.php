@@ -1,0 +1,713 @@
+@extends('layouts.app')
+
+@section('content')
+
+    <style>
+        /* style css tabe */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+            padding: 10px;
+        }
+
+        .table thead th {
+            background-color: #245a7e;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background-color: #728da392;
+        }
+
+        .table tbody td {
+            text-align: center;
+            border-color: #e3dfdf;
+        }
+
+        .btn-info {
+            background-color: #245a7e;
+            border-color: #245a7e;
+        }
+
+        .btn-info:hover {
+            background-color: #4a86f75d;
+            border-color: #f8f8f8;
+        }
+
+        /* end style css tabel */
+
+        .swal2-popup.swal2-toast.colored-toast {
+            background-color: #a5dc86 !important;
+            color: white;
+            /* Optionally, you can change text color as well */
+        }
+
+        .swal2-toast {
+            background-color: #ef9191 !important;
+            /* Warna kuning */
+            color: #000000 !important;
+            /* Warna teks */
+        }
+    </style>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="m-0">List Item Out Store Room ASI-1</h1>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">List Item Out ASI-1</h3>
+                            <div class="card-tools">
+                                <button class="btn btn-primary btn-sm" id="btn_add"><i class="fa fa-plus"></i> Add</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-inline">
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Dari Tanggal</div>
+                                    </div>
+                                    <input type="date" id="start_date" class="form-control" required>
+                                </div>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Sampai Tanggal</div>
+                                    </div>
+                                    <input type="date" id="end_date" class="form-control" required>
+                                </div>
+
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">Jenis Item</div>
+                                    </div>
+                                    <select id="barang_id" class="form-control select2" required>
+                                        <option value="" selected>- Semua -</option>
+                                        @foreach($master_list_strs as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }} ( {{ $item->category }} )
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                {{-- <i class="fas fa-file-excel"></i> --}}
+                                <button class="btn btn-success mb-2" id="btn_export"><i class="fas fa-file-excel"></i>Export
+                                    Excel</button>
+                            </div>
+
+                            <br>
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead class="table-card" style="background-color: rgb(167, 192, 192)">
+                                    <tr>
+                                        <th width="50">No</th>
+                                        <th><b>DATE</b></th>
+                                        <th><b>LINE</b></th>
+                                        <th width="80"><b>ACTION</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be populated here -->
+                                </tbody>
+                            </table>
+
+                            <div class="col-sm-12">
+                                <table id="example2" class="table table-bordered table-striped">
+
+                                    <thead>
+                                        <tr>
+                                            <th width="50">No</th>
+                                            {{-- <th>Dept</th> --}}
+                                            <th>Dept</th>
+                                            <th>Item</th>
+                                            <th>Item Returns</th>
+                                            <th>Item Out</th>
+                                            <th>Satuan</th>
+                                            <th>Keterangan</th>
+                                            <th width="80">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .date-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .date-filter input {
+            flex: 1;
+            width: 150px;
+            /* Menetapkan lebar khusus */
+            max-width: 150px;
+            /* Menetapkan lebar maksimum */
+        }
+    </style>
+
+
+    <div class="modal fade" id="myModal2">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header"
+                    style="background: linear-gradient(to bottom, #003366 32%, #3366cc 100%); color:white">
+                    <h4 class="modal-title" id="title1"><b>Add Item Out ASI-1</b></h4>
+                    <h4 class="modal-title" id="title2"><b>Edit Item Out ASI-1</b></h4>
+                    <button type="button" class="close; btn btn-secondary btn-sm" data-dismiss="modal"
+                        aria-label="Close">Close
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-12" id="alert"></div>
+                        <label class="col-sm-2 col-form-label">Date :</label>
+                        <div class="col-sm-3">
+                            <input type="hidden" id="id" class="form-control" required>
+                            <input type="date" id="date_plan" class="form-control form-control-sm" required>
+                        </div>
+
+                        <div class="col-sm-7"></div>
+                        <label class="col-sm-2 col-form-label">Dept :</label>
+                        <div class="col-sm-3 mb-1">
+                            <select style="width: 100%;" id="line_id" class="form-control select2" required>
+                                <option value="" selected>- pilih -</option>
+                                @foreach ($departements as $dept)
+                                    <option value="{{ $dept->id }}">{{ $dept->name_dept }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-sm-7"></div>
+                        <label class="col-sm-2 col-form-label">Item :</label>
+                        <div class="col-sm-10 mb-1">
+                            <select style="width: 100%;" id="item_id" class="form-control select2" required>
+                                <option value="" selected>- pilih -</option>
+                                @foreach ($master_list_strs as $barang) ()
+                                    <option value="{{ $barang->id }}">{{ $barang->name}} / {{ $barang->category}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        {{-- <label class="col-sm-2 col-form-label">Material :</label>
+                        <div class="col-sm-10 mb-1">
+                            <select style="width: 100%;" id="material_id" class="form-control select2" required>
+                                <option value="" selected>- pilih -</option>
+                                @foreach ($materials as $material)
+                                <option value="{{ $material->id }}">{{ $material->spek }} </option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+
+                        <label class="col-sm-2 col-form-label">Item Returns:</label>
+                        <div class="col-sm-2">
+                            <input type="text" id="qty_request" class="form-control form-control-sm" required>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label">Qty Out :</label>
+                        <div class="col-sm-2">
+                            <input type="text" id="qty_out" class="form-control form-control-sm" required>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label">Satuan :</label>
+                        <div class="col-sm-2 mb-1">
+                            <select style="width: 100%;" id="satuan" class="form-control select2" required>
+                                <option value="" selected>- pilih -</option>
+                                @foreach ($str_uoms as $satuan)
+                                    <option value="{{ $satuan->id }}">{{ $satuan->name}} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <label class="col-sm-2 col-form-label">Keterangan</label>
+                        <div class="col-sm-10 mb-1">
+                            <input type="text" id="keterangan" class="form-control form-control-sm" required>
+                        </div>
+
+                        <label class="col-sm-2 col-form-label"></label>
+
+                        <div class="col-sm-7">
+                            <button type="button" class="btn btn-primary btn-sm Save">Insert</button>
+                            <button type="button" class="btn btn-warning btn-sm Update">Edit</button>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('scripts')
+    <!-- DataTables  & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+
+
+        // $(document).ready(function() {
+        //     $('#item_id').select2();
+        //     });
+
+        $(document).ready(function () {
+            list();
+        });
+
+        function list() {
+            var table = $('#example1').DataTable({
+                processing: true,
+                serverSide: true,
+                autoWidth: false,
+                responsive: false,
+                searching: true,
+                bLengthChange: true,
+                destroy: true,
+                pageLength: 5,
+                ajax: {
+                    url: "{{ route('strout.list') }}"
+                },
+                columns: [{
+                    data: null,
+                    sortable: false,
+                    searchable: false,
+                    orderable: false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'date_plan',
+                    name: 'date_plan'
+                },
+                {
+                    data: 'line',
+                    name: 'line'
+                },
+                {
+                    data: 'mix_id',
+                    name: 'mix_id',
+                    render: function (data) {
+                        return '<a href="#" id="btn_edit" title="Edit" data-id="' + data + '" class="btn btn-warning btn-sm">' +
+                            '<i class="fas fa-pencil-alt"></i>' +
+                            '</a>' +
+                            '<a href="#" id="btn_delete" title="Delete" data-id="' + data + '" class="btn btn-danger btn-sm ml-1">' +
+                            '<i class="far fa-trash-alt"></i>' +
+                            '</a>';
+                    }
+                }
+                ],
+                columnDefs: [{
+                    "targets": [0],
+                    "orderable": false,
+                }],
+                responsive: true,
+                fixedColumns: true,
+                oLanguage: {
+                    sProcessing: '<img src="{{asset('dist/img/Hourglass.gif')}}">Loading . . .'
+                }
+            });
+        }
+
+        function listdetail() {
+            var table = $('#example2').DataTable({
+                processing: true,
+                serverSide: true,
+                autoWidth: false,
+                responsive: false,
+                searching: true,
+                bLengthChange: true,
+                destroy: true,
+                pageLength: 10,
+                ajax: {
+                    url: "{{ route('strout.listdetail') }}",
+                    data: {
+                        date_plan: date_plan.value,
+                        line_id: line_id.value,
+                    }
+                },
+                columns: [{
+                    data: null,
+                    sortable: false,
+                    searchable: false,
+                    orderable: false,
+                    render: function (data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1;
+                    }
+                },
+                {
+                    data: 'line_id',
+                    name: 'line_id'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'qty_request',
+                    name: 'qty_request'
+                },
+                {
+                    data: 'qty_out',
+                    name: 'qty_out'
+                },
+                {
+                    data: 'satuan',
+                    name: 'satuan'
+                },
+                {
+                    data: 'keterangan',
+                    name: 'keterangan'
+                },
+                {
+                    data: 'id',
+                    name: 'id',
+                    render: function (data) {
+                        return '<a href="#" id="btn_delete_line" title="Delete" data-id="' + data + '" class="btn btn-danger btn-sm ml-1">' +
+                            '<i class="far fa-trash-alt"></i>' +
+                            '</a>' +
+                            '<a href="#" id="btn_edit_line" title="Edit" data-id="' + data + '" class="btn btn-warning btn-sm ml-1">' +
+                            '<i class="fas fa-pencil-alt"></i>' +
+                            '</a>';
+                    }
+                }
+                ],
+                columnDefs: [{
+                    "targets": [0],
+                    "orderable": false,
+                }],
+                responsive: true,
+                fixedColumns: true,
+                oLanguage: {
+                    sProcessing: '<img src="{{asset('dist/img/Hourglass.gif')}}">Loading . . .'
+                }
+            });
+        }
+
+        $(document).on("click", "#btn_add", function () {
+            $('#myModal2').modal({ backdrop: 'static', keyboard: false, show: true });
+            $("#title2").hide();
+            $("#title1").show();
+            clear();
+        });
+
+        $(document).on("click", "#btn_edit", function () {
+            $("#title1").hide();
+            $("#title2").show();
+            var id = $(this).data('id');
+            var date_plan = id.substr(0, 10);
+            var idline = id.substr(10);
+            $('#myModal2').modal({ backdrop: 'static', keyboard: false, show: true });
+            $('#date_plan').val(date_plan);
+            $('#line_id').val(idline).trigger('change');
+            listdetail();
+        });
+
+        $(document).on("click", ".Update", function () {
+            if (validasi()) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{route('strout.update')}}",
+                    data: {
+                        id: id.value,
+                        item_id: item_id.value,
+                        qty_request: qty_request.value,
+                        qty_out: qty_out.value,
+                        satuan: satuan.value,
+                        keterangan: keterangan.value,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            SweetAlert.fire({
+                                icon: 'success', title: 'Success', text: result.msg, showConfirmButton: false, timer: 1500
+                            });
+
+                            listdetail();
+                            $('#item_id').val('').trigger('change');
+                            $("#qty_request").val('');
+                            $("#qty_out").val('');
+                            $("#satuan").val('');
+                            $('#keterangan').val('').trigger('change');
+                            setTimeout(() => { $("#alert").hide(); }, 150);
+                        } else {
+                            SweetAlert.fire({
+                                icon: 'warning', title: 'Warning', text: result.msg, showConfirmButton: false, timer: 2500
+                            });
+                        }
+                    }
+                });
+            }
+        });
+
+        $(document).on("click", ".close", function () {
+            clear();
+            $("#alert").html('');
+            list();
+        });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            customClass: {
+                container: 'swal2-toast-container'
+            },
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        $(document).on("click", "#btn_export", function () {
+            var startDate = $('#start_date').val();
+            var endDate = $('#end_date').val();
+            var barangId = $('#barang_id').val(); // Ambil item_id dari dropdown
+
+            if (startDate && endDate) {
+                // Sertakan item_id jika ada
+                window.location.href = "{{ route('strout.export') }}?start_date=" + startDate + "&end_date=" + endDate + "&barang_id=" + barangId;
+            } else {
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Incomplete Date Range',
+                    text: 'Please select a date range before exporting.'
+                });
+            }
+        });
+
+
+        function clear() {
+            $("#id").val('');
+            $("#date_plan").val('');
+            $('#line_id').val('');
+            $('#item_id').val('');
+            $("#qty_request").val('');
+            $('#qty_out').val('');
+            $('#keterangan').val('');
+            // $('#material_id').val('').trigger('change');
+        }
+
+        $(document).on("click", ".Save", function () {
+            $("#alert").html('');
+            $("#alert").show();
+            if (validasi()) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{route('strout.store')}}",
+                    data: {
+                        date_plan: date_plan.value,
+                        line_id: line_id.value,
+                        item_id: item_id.value,
+                        qty_request: qty_request.value,
+                        qty_out: qty_out.value,
+                        satuan: satuan.value,
+                        keterangan: keterangan.value,
+                        // material_id: material_id.value,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function (result) {
+                        const Toast = Swal.mixin({
+                            icon: 'success',
+                            title: 'Yeahh...',
+                            text: 'Insert Item Succes...',
+                            toast: true,
+                            position: 'top-end',
+                            iconColor: 'white',
+                            customClass: {
+                                popup: 'colored-toast',
+                            },
+                            showConfirmButton: false,
+                            timer: 2500,
+                            timerProgressBar: true,
+                        });
+
+                        if (result.success) {
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Yeah..',
+                            });
+                            listdetail();
+                            $('#item_id').val('').trigger('change');
+                            $("#qty_request").val('');
+                            $("#qty_out").val('');
+                            $("#satuan").val('');
+                            $("#keterangan").val('');
+                            // $('#material_id').val('').trigger('change');
+                            setTimeout(() => { $("#alert").hide(); }, 1500);
+                        } else {
+                            $("#alert").html('<div class="alert alert-danger"><i class="fa fa-warning"></i> ' + result.msg + '</div>');
+                            setTimeout(() => { $("#alert").hide(); }, 1500);
+                        }
+                    }
+                });
+            }
+        });
+
+        function validasi() {
+            if (date_plan.value != '' && line_id.value != '' && item_id.value != '' && qty_out.value != '' && satuan.value != '') {
+                return true;
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'All columns cannot be empty!',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                });
+                return false;
+            }
+        }
+
+        $(document).on("click", "#btn_edit_line", function () {
+            $(".Save").hide();
+            $("#title1").hide();
+            $(".Update").show();
+            $("#title2").show();
+            var id = $(this).data('id');
+            $.ajax({
+                type: 'GET',
+                url: "{{route('strout.edit')}}",
+                data: {
+                    id: id,
+                    _token: '{{csrf_token()}}'
+                },
+                success: function (result) {
+                    if (result.success) {
+                        $('#myModal2').modal({ backdrop: 'static', keyboard: false, show: true });
+                        $('#id').val(result.id);
+                        $('#item_id').val(result.item_id).trigger('change');
+                        $('#qty_request').val(result.qty_request).trigger('change');
+                        $('#qty_out').val(result.qty_out).trigger('change');
+                        $('#satuan').val(result.satuan).trigger('change');
+                        $('#keterangan').val(result.keterangan);
+                    } else {
+                        SweetAlert.fire({
+                            icon: 'warning', title: 'Warning', text: result.msg, showConfirmButton: false, timer: 1500
+                        });
+                    }
+                }
+            });
+        });
+
+
+        $(document).on("click", "#btn_delete_line", function () {
+            var id = $(this).data('id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this! Item",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('strout.destroyline')}}",
+                        data: { id: id, _token: '{{csrf_token()}}' },
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.success) {
+                                SweetAlert.fire({
+                                    icon: 'success', title: 'Success', text: result.msg, showConfirmButton: false, timer: 1500
+                                });
+                            } else {
+                                SweetAlert.fire({
+                                    icon: 'error', title: 'Error', text: result.msg, showConfirmButton: false, timer: 1500
+                                });
+                            }
+                            listdetail();
+                        }
+                    });
+                }
+            })
+        });
+
+        $(document).on("click", "#btn_delete", function () {
+            var id = $(this).data('id');
+            var date_plan = id.substr(0, 10);
+            var idline = id.substr(10);
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('strout.destroy')}}",
+                        data: { date_plan: date_plan, idline: idline, _token: '{{csrf_token()}}' },
+                        dataType: 'json',
+                        success: function (result) {
+                            if (result.success) {
+                                SweetAlert.fire({
+                                    icon: 'success', title: 'Success', text: result.msg, showConfirmButton: false, timer: 1500
+                                });
+                            } else {
+                                SweetAlert.fire({
+                                    icon: 'error', title: 'Error', text: result.msg, showConfirmButton: false, timer: 1500
+                                });
+                            }
+                            list();
+                        }
+                    });
+                }
+            })
+        });
+    </script>
+@endpush
+
+@push('stylesheets')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+@endpush

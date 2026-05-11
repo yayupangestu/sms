@@ -9,8 +9,8 @@ class DepartementController extends Controller
 {
     public function index()
     {
-      $title =' Data Departement';
-      return view('storeroom.dept', compact('title'));
+        $title = ' Data Departement';
+        return view('store.dept', compact('title'));
     }
 
     public function list()
@@ -21,22 +21,22 @@ class DepartementController extends Controller
 
     public function store(Request $request)
     {
-        $dept               = new Departement;
-        $dept->name_dept    = $request->name_dept;
-        $dept->head         = $request->head;
-        $dept->code         = $request->code;
-        $dept->description  = $request->description;
-        $dept->createdby    = auth()->user()->id;
-        $query              = $dept->save();
-        if($query){
+        $dept = new Departement;
+        $dept->name_dept = $request->name_dept;
+        $dept->head = $request->head;
+        $dept->code = $request->code;
+        $dept->description = $request->description;
+        $dept->createdby = auth()->user()->id;
+        $query = $dept->save();
+        if ($query) {
             return response()->json([
-                'success'   => true,
-                'msg'       => 'Insert success.'
+                'success' => true,
+                'msg' => 'Insert success.'
             ]);
-        }else{
+        } else {
             return response()->json([
-                'success'   => false,
-                'msg'       => 'Insert failed.'
+                'success' => false,
+                'msg' => 'Insert failed.'
             ]);
         }
     }
@@ -44,41 +44,41 @@ class DepartementController extends Controller
     public function edit(Request $request)
     {
         $cek = Departement::where('id', $request->id)->count();
-        if($cek > 0){
+        if ($cek > 0) {
             $row = Departement::where('id', $request->id)->first();
             return response()->json([
-                'success'       => true,
-                'id'            => $row->id,
-                'name_dept'          => $row->name_dept,
-                'head'          => $row->head,
-                'code'          => $row->code,
-                'description'   => $row->description
+                'success' => true,
+                'id' => $row->id,
+                'name_dept' => $row->name_dept,
+                'head' => $row->head,
+                'code' => $row->code,
+                'description' => $row->description
             ]);
-        }else{
+        } else {
             return response()->json([
-                'success'   => false,
-                'msg'       => 'Data Not found.'
+                'success' => false,
+                'msg' => 'Data Not found.'
             ]);
         }
     }
 
     public function update(Request $request)
     {
-        $data['name_dept']      = $request->name_dept;
-        $data['head']           = $request->head;
-        $data['code']           = $request->code;
-        $data['description']    = $request->description;
-        $data['updateby']       = auth()->user()->id;
+        $data['name_dept'] = $request->name_dept;
+        $data['head'] = $request->head;
+        $data['code'] = $request->code;
+        $data['description'] = $request->description;
+        $data['updateby'] = auth()->user()->id;
         $query = Departement::where('id', $request->id)->update($data);
-        if($query){
+        if ($query) {
             return response()->json([
-                'success'   => true,
-                'msg'       => 'Update success.'
+                'success' => true,
+                'msg' => 'Update success.'
             ]);
-        }else{
+        } else {
             return response()->json([
-                'success'   => false,
-                'msg'       => 'Update failed.'
+                'success' => false,
+                'msg' => 'Update failed.'
             ]);
         }
     }
@@ -86,15 +86,15 @@ class DepartementController extends Controller
     public function destroy(Request $request)
     {
         $query = Departement::where('id', $request->id)->delete();
-        if($query){
+        if ($query) {
             return response()->json([
-                'success'   => true,
-                'msg'       => 'Delete success.'
+                'success' => true,
+                'msg' => 'Delete success.'
             ]);
-        }else{
+        } else {
             return response()->json([
-                'success'   => false,
-                'msg'       => 'Delete failed.'
+                'success' => false,
+                'msg' => 'Delete failed.'
             ]);
         }
     }

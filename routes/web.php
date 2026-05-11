@@ -1938,6 +1938,30 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokCuptipController@export')->name('stokcuptip.export');
     });
 
+    Route::group(['prefix' => 'strout'], function () {
+        Route::get('/', 'StrOutController@index')->name('strout.index');
+        Route::get('/list', 'StrOutController@list')->name('strout.list');
+        // Route::get('/getdoc', 'StrOutController@getdoc')->name('strout.getdoc');
+        Route::get('/listdetail', 'StrOutController@listdetail')->name('strout.listdetail');
+        Route::post('/create', 'StrOutController@store')->name('strout.store');
+        Route::get('/edit', 'StrOutController@edit')->name('strout.edit');
+        Route::post('/delete', 'StrOutController@destroy')->name('strout.destroy');
+        Route::post('/deleteline', 'StrOutController@destroyline')->name('strout.destroyline');
+        Route::get('/export', 'StrOutController@export')->name('strout.export');
+        Route::post('/update', 'StrOutController@update')->name('strout.update');
+        Route::get('/update-price-items', 'StrOutController@updatePriceItems')->name('strout.updatePriceItems');
+
+    });
+
+    Route::group(['prefix' => 'dept'], function () {
+        Route::get('/', 'DepartementController@index')->name('dept.index');
+        Route::get('/list', 'DepartementController@list')->name('dept.list');
+        Route::post('/create', 'DepartementController@store')->name('dept.store');
+        Route::get('/edit', 'DepartementController@edit')->name('dept.edit');
+        Route::post('/update', 'DepartementController@update')->name('dept.update');
+        Route::post('/delete', 'DepartementController@destroy')->name('dept.destroy');
+
+    });
 
 
 });

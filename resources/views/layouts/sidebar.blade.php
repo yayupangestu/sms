@@ -37,13 +37,13 @@
         transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    .main-sidebar .nav-icon {
+    /* .main-sidebar .nav-icon {
         font-size: 24px !important;
         margin-right: 12px !important;
         color: rgb(167, 192, 192) !important;
         text-shadow: 6px 5px 7px #000000;
         transition: all 0.3s ease !important;
-    }
+    } */
 
     /* Category Headers */
     .main-sidebar .nav-header {
@@ -2396,16 +2396,16 @@
                             </li>
                         </ul>
                         <!-- <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                                        <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                                            <a href="{{ route('scanreturnrm.index') }}"
-                                                                                                                                                                                                                                                                                                                class="nav-link {{ Request::is('scanreturnrm') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                                                <i class="nav-icon ph-fill ph-scan"></i>
-                                                                                                                                                                                                                                                                                                                <p>
-                                                                                                                                                                                                                                                                                                                    Scan Return RM (B3,C1,C2)
-                                                                                                                                                                                                                                                                                                                </p>
-                                                                                                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                                                                                    </ul> -->
+                                                                                                                                                                                                                                                                                                                                                                    <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                                        <a href="{{ route('scanreturnrm.index') }}"
+                                                                                                                                                                                                                                                                                                                                                                            class="nav-link {{ Request::is('scanreturnrm') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                                            <i class="nav-icon ph-fill ph-scan"></i>
+                                                                                                                                                                                                                                                                                                                                                                            <p>
+                                                                                                                                                                                                                                                                                                                                                                                Scan Return RM (B3,C1,C2)
+                                                                                                                                                                                                                                                                                                                                                                            </p>
+                                                                                                                                                                                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                                                                                                                                </ul> -->
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('dashboardplanning.index') }}"
@@ -2567,82 +2567,82 @@
                     </li>
                     {{-- LINE STAMPING REPORT --}}
                     <!-- <li
-                                                                                                                                                                                                                                                                            class="nav-item {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'menu-open' : '' }}">
-                                                                                                                                                                                                                                                                            <a href="#"
-                                                                                                                                                                                                                                                                                class="nav-link {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                <i class="nav-icon ph-duotone ph-file-text"></i>
-                                                                                                                                                                                                                                                                                <p>
-                                                                                                                                                                                                                                                                                    Report & LKH Stamping
-                                                                                                                                                                                                                                                                                    <i class="right fas fa-angle-left"></i>
-                                                                                                                                                                                                                                                                                </p>
-                                                                                                                                                                                                                                                                            </a>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('lkhb3.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('lkhb3') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            LKH B3
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('lkhc1.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('lkhc1') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            LKH C1
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('lkhc2.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('lkhc2') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            LKH C2
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('reportb3.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('reportb3') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            Report B3
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('reportc1.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('reportc1') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            Report C1
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                            <ul class="nav nav-treeview">
-                                                                                                                                                                                                                                                                                <li class="nav-item ml-3">
-                                                                                                                                                                                                                                                                                    <a href="{{ route('reportc2.index') }}"
-                                                                                                                                                                                                                                                                                        class="nav-link {{ Request::is('reportc2') ? 'active' : '' }}">
-                                                                                                                                                                                                                                                                                        <i class="nav-icon fas fa fa-tasks"></i>
-                                                                                                                                                                                                                                                                                        <p>
-                                                                                                                                                                                                                                                                                            Report C2
-                                                                                                                                                                                                                                                                                        </p>
-                                                                                                                                                                                                                                                                                    </a>
-                                                                                                                                                                                                                                                                                </li>
-                                                                                                                                                                                                                                                                            </ul>
-                                                                                                                                                                                                                                                                        </li> -->
+                                                                                                                                                                                                                                                                                                                                        class="nav-item {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'menu-open' : '' }}">
+                                                                                                                                                                                                                                                                                                                                        <a href="#"
+                                                                                                                                                                                                                                                                                                                                            class="nav-link {{ Request::is('lkhb3', 'reportb3', 'reportc1', 'reportc2', 'lkhc1', 'lkhc2', ) ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                            <i class="nav-icon ph-duotone ph-file-text"></i>
+                                                                                                                                                                                                                                                                                                                                            <p>
+                                                                                                                                                                                                                                                                                                                                                Report & LKH Stamping
+                                                                                                                                                                                                                                                                                                                                                <i class="right fas fa-angle-left"></i>
+                                                                                                                                                                                                                                                                                                                                            </p>
+                                                                                                                                                                                                                                                                                                                                        </a>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('lkhb3.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('lkhb3') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        LKH B3
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('lkhc1.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('lkhc1') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        LKH C1
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('lkhc2.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('lkhc2') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        LKH C2
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('reportb3.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('reportb3') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        Report B3
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('reportc1.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('reportc1') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        Report C1
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                        <ul class="nav nav-treeview">
+                                                                                                                                                                                                                                                                                                                                            <li class="nav-item ml-3">
+                                                                                                                                                                                                                                                                                                                                                <a href="{{ route('reportc2.index') }}"
+                                                                                                                                                                                                                                                                                                                                                    class="nav-link {{ Request::is('reportc2') ? 'active' : '' }}">
+                                                                                                                                                                                                                                                                                                                                                    <i class="nav-icon fas fa fa-tasks"></i>
+                                                                                                                                                                                                                                                                                                                                                    <p>
+                                                                                                                                                                                                                                                                                                                                                        Report C2
+                                                                                                                                                                                                                                                                                                                                                    </p>
+                                                                                                                                                                                                                                                                                                                                                </a>
+                                                                                                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                                                                                                        </ul>
+                                                                                                                                                                                                                                                                                                                                    </li> -->
                     {{-- LINE STORE SECTION --}}
                     <li
                         class="nav-item {{ Request::is('scaninlsrepair', 'linestorestok', 'linestoreindex', 'linestoreindex2', 'linestoreupload', 'scaninls2', 'dashboard1ls', 'tabelstoksbc', 'scanoutls') ? 'menu-open' : '' }}">
@@ -3184,9 +3184,9 @@
 
                     <li class="nav-header">STORE ROOM SYSTEM</li>
                     <li
-                        class="nav-item {{ Request::is('masterliststr', 'category', 'uom', 'supplier') ? 'menu-open' : '' }}">
+                        class="nav-item {{ Request::is('masterliststr', 'category', 'uom', 'supplier', 'dept') ? 'menu-open' : '' }}">
                         <a href="#"
-                            class="nav-link {{ Request::is('masterliststr', 'category', 'uom', 'supplier') ? 'active' : '' }}">
+                            class="nav-link {{ Request::is('masterliststr', 'category', 'uom', 'supplier', 'dept') ? 'active' : '' }}">
                             <i class="nav-icon ph-duotone ph-factory"></i>
                             <p>
                                 MASTER DATA
@@ -3237,84 +3237,113 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('dept.index') }}"
+                                    class="nav-link {{ Request::is('dept', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-sitemap"></i>
+                                    <p>
+                                        Departement
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li
                         class="nav-item {{ Request::is('stokatk', 'stokrtk', 'stokconsum', 'stokgas', 'stokti', 'stokcuptip') ? 'menu-open' : '' }}">
                         <a href="#"
                             class="nav-link {{ Request::is('stokatk', 'stokrtk', 'stokconsum', 'stokgas', 'stokti', 'stokcuptip') ? 'active' : '' }}">
-                            <i class="nav-icon ph-duotone ph-factory"></i>
+                            <i class="nav-icon fas fa-warehouse"></i>
                             <p>
                                 ITEM STOK
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokatk.index') }}"
-                                    class="nav-link {{ Request::is('stokatk', ) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-box-open"></i>
-                                    <p>
-                                        ATK
-                                    </p>
+                                    class="nav-link {{ Request::is('stokatk') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-pencil-alt"></i>
+                                    <p>ATK</p>
                                 </a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokrtk.index') }}"
-                                    class="nav-link {{ Request::is('stokrtk', ) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-sitemap"></i>
-                                    <p>
-                                        RTK
-                                    </p>
+                                    class="nav-link {{ Request::is('stokrtk') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-tools"></i>
+                                    <p>RTK</p>
                                 </a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokconsum.index') }}"
-                                    class="nav-link {{ Request::is('stokconsum', ) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-sitemap"></i>
-                                    <p>
-                                        CONSUMABLE
-                                    </p>
+                                    class="nav-link {{ Request::is('stokconsum') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-boxes"></i>
+                                    <p>CONSUMABLE</p>
                                 </a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokgas.index') }}"
-                                    class="nav-link {{ Request::is('stokgas', ) ? 'active' : '' }}">
+                                    class="nav-link {{ Request::is('stokgas') ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-gas-pump"></i>
-                                    <p>
-                                        GAS
-                                    </p>
+                                    <p>GAS</p>
                                 </a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokti.index') }}"
-                                    class="nav-link {{ Request::is('stokti', ) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-sitemap"></i>
-                                    <p>
-                                        TI (TOOLING INSPECTION)
-                                    </p>
+                                    class="nav-link {{ Request::is('stokti') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-search"></i>
+                                    <p>TOOL & INSERT</p>
                                 </a>
                             </li>
                         </ul>
+
                         <ul class="nav nav-treeview">
                             <li class="nav-item ml-3">
                                 <a href="{{ route('stokcuptip.index') }}"
-                                    class="nav-link {{ Request::is('stokcuptip', ) ? 'active' : '' }}">
-                                    <i class="nav-icon fas fa-sitemap"></i>
-                                    <p>
-                                        CUPTIP
+                                    class="nav-link {{ Request::is('stokcuptip') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-horse"></i>
+                                    <p>CUPTIP</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <li class="nav-item {{ Request::is('strout', 'strin', 'exportall') ? 'menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ Request::is('strout', 'strin') ? 'active' : '' }}">
+                            <i class="fas fas fas fa-handshake"></i>
+                            <p>
+                                TRANSAKSI
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item ml-3">
+                                <a href="{{ route('strout.index') }}"
+                                    class="nav-link {{ Request::is('strout', ) ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa-dolly"
+                                        style="font-size:20px;color:rgb(167, 192, 192);text-shadow:6px 5px 7px #000000;"></i>
+                                    Item Out
                                     </p>
                                 </a>
                             </li>
                         </ul>
+                    </li>
 
                     <li class=" nav-header">CONFIGURATIONS
                     </li>
