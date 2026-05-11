@@ -1953,6 +1953,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'strin'], function () {
+        Route::get('/', 'StrInController@index')->name('strin.index');
+        Route::get('/list', 'StrInController@list')->name('strin.list');
+        Route::get('/getdoc', 'StrInController@getdoc')->name('strin.getdoc');
+        Route::get('/listdetail', 'StrInController@listdetail')->name('strin.listdetail');
+        Route::post('/create', 'StrInController@store')->name('strin.store');
+        Route::get('/edit', 'StrInController@edit')->name('strin.edit');
+        Route::post('/delete', 'StrInController@destroy')->name('strin.destroy');
+        Route::post('/deleteline', 'StrInController@destroyline')->name('strin.destroyline');
+        Route::get('/export', 'StrInController@export')->name('strin.export');
+        // Route::get('/export', 'StrInController@export')->name('strout.export');
+    });
+
     Route::group(['prefix' => 'dept'], function () {
         Route::get('/', 'DepartementController@index')->name('dept.index');
         Route::get('/list', 'DepartementController@list')->name('dept.list');
