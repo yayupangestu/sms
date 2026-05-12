@@ -100,8 +100,19 @@ use App\Http\Controllers\StrOut8Controller;
 use App\Http\Controllers\StrOut9Controller;
 use App\Http\Controllers\StrOut10Controller;
 use App\Http\Controllers\StrOut11Controller;
+use App\Http\Controllers\StrOut12Controller;
+use App\Http\Controllers\StrOut13Controller;
+use App\Http\Controllers\StrOut14Controller;
+use App\Http\Controllers\StrOut15Controller;
+use App\Http\Controllers\StrOut16Controller;
+use App\Http\Controllers\StrOut17Controller;
+use App\Http\Controllers\StrOut18Controller;
+use App\Http\Controllers\StrOut19Controller;
+use App\Http\Controllers\StrOut20Controller;
+use App\Http\Controllers\StrKanbanController;
 
-/*
+
+/* 
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
