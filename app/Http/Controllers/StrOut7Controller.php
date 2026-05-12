@@ -20,9 +20,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-
-// use DB;
 
 
 class StrOut7Controller extends Controller

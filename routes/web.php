@@ -110,6 +110,7 @@ use App\Http\Controllers\StrOut18Controller;
 use App\Http\Controllers\StrOut19Controller;
 use App\Http\Controllers\StrOut20Controller;
 use App\Http\Controllers\StrKanbanController;
+use App\Http\Controllers\StrKanban2Controller;
 
 
 /* 
@@ -1908,6 +1909,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokAtkController@export')->name('stokatk.export');
     });
 
+    Route::group(['prefix' => 'stokatk2'], function () {
+        Route::get('/', 'Str2StokAtkController@index')->name('stokatk2.index');
+        Route::get('/list', 'Str2StokAtkController@list')->name('stokatk2.list');
+        Route::post('/create', 'Str2StokAtkController@store')->name('stokatk2.store');
+        Route::get('/edit', 'Str2StokAtkController@edit')->name('stokatk2.edit');
+        Route::post('/update', 'Str2StokAtkController@update')->name('stokatk2.update');
+        Route::post('/delete', 'Str2StokAtkController@destroy')->name('stokatk2.destroy');
+        Route::get('users/export', 'Str2StokAtkController@export')->name('stokatk2.export');
+        // Route::get('users/export', 'StrStokAtkController@export')->name('stokatk.export');
+    });
+
     Route::group(['prefix' => 'stokrtk'], function () {
         Route::get('/', 'StrStokRtkController@index')->name('stokrtk.index');
         Route::get('/list', 'StrStokRtkController@list')->name('stokrtk.list');
@@ -1916,6 +1928,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update', 'StrStokRtkController@update')->name('stokrtk.update');
         Route::post('/delete', 'StrStokRtkController@destroy')->name('stokrtk.destroy');
         Route::get('users/export', 'StrStokRtkController@export')->name('stokrtk.export');
+    });
+
+    Route::group(['prefix' => 'stokrtk2'], function () {
+        Route::get('/', 'Str2StokRtkController@index')->name('stokrtk2.index');
+        Route::get('/list', 'Str2StokRtkController@list')->name('stokrtk2.list');
+        Route::post('/create', 'Str2StokRtkController@store')->name('stokrtk2.store');
+        Route::get('/edit', 'Str2StokRtkController@edit')->name('stokrtk2.edit');
+        Route::post('/update', 'Str2StokRtkController@update')->name('stokrtk2.update');
+        Route::post('/delete', 'Str2StokRtkController@destroy')->name('stokrtk2.destroy');
+        Route::get('/export', 'Str2StokRtkController@export')->name('stokrtk2.export');
+        // Route::get('/cetak_pdf', 'Str2StokRtkController@cetak_pdf')->name('stokrtk2.cetak_pdf');
     });
 
     Route::group(['prefix' => 'stokconsum'], function () {
@@ -1930,6 +1953,16 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'stokconsum2'], function () {
+        Route::get('/', 'Str2StokConsumController@index')->name('stokconsum2.index');
+        Route::get('/list', 'Str2StokConsumController@list')->name('stokconsum2.list');
+        Route::post('/create', 'Str2StokConsumController@store')->name('stokconsum2.store');
+        Route::get('/edit', 'Str2StokConsumController@edit')->name('stokconsum2.edit');
+        Route::post('/update', 'Str2StokConsumController@update')->name('stokconsum2.update');
+        Route::post('/delete', 'Str2StokConsumController@destroy')->name('stokconsum2.destroy');
+        Route::get('users/export', 'Str2StokConsumController@export')->name('stokconsum2.export');
+    });
+
     Route::group(['prefix' => 'stokgas'], function () {
         Route::get('/', 'StrStokGasController@index')->name('stokgas.index');
         Route::get('/list', 'StrStokGasController@list')->name('stokgas.list');
@@ -1938,6 +1971,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/update', 'StrStokGasController@update')->name('stokgas.update');
         Route::post('/delete', 'StrStokGasController@destroy')->name('stokgas.destroy');
         Route::get('users/export', 'StrStokGasController@export')->name('stokgas.export');
+    });
+
+    Route::group(['prefix' => 'stokgas2'], function () {
+        Route::get('/', 'Str2StokGasController@index')->name('stokgas2.index');
+        Route::get('/list', 'Str2StokGasController@list')->name('stokgas2.list');
+        Route::post('/create', 'Str2StokGasController@store')->name('stokgas2.store');
+        Route::get('/edit', 'Str2StokGasController@edit')->name('stokgas2.edit');
+        Route::post('/update', 'Str2StokGasController@update')->name('stokgas2.update');
+        Route::post('/delete', 'Str2StokGasController@destroy')->name('stokgas2.destroy');
+        Route::get('users/export', 'Str2StokGasController@export')->name('stokgas2.export');
     });
 
     Route::group(['prefix' => 'stokti'], function () {
@@ -1950,6 +1993,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users/export', 'StrStokToolController@export')->name('stokti.export');
     });
 
+    Route::group(['prefix' => 'stokti2'], function () {
+        Route::get('/', 'Str2StokTiController@index')->name('stokti2.index');
+        Route::get('/list', 'Str2StokTiController@list')->name('stokti2.list');
+        Route::post('/create', 'Str2StokTiController@store')->name('stokti2.store');
+        Route::get('/edit', 'Str2StokTiController@edit')->name('stokti2.edit');
+        Route::post('/update', 'Str2StokTiController@update')->name('stokti2.update');
+        Route::post('/delete', 'Str2StokTiController@destroy')->name('stokti2.destroy');
+        Route::get('users/export', 'Str2StokTiController@export')->name('stokti2.export');
+    });
+
     Route::group(['prefix' => 'stokcuptip'], function () {
         Route::get('/', 'StrStokCuptipController@index')->name('stokcuptip.index');
         Route::get('/list', 'StrStokCuptipController@list')->name('stokcuptip.list');
@@ -1959,6 +2012,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/delete', 'StrStokCuptipController@destroy')->name('stokcuptip.destroy');
         Route::get('users/export', 'StrStokCuptipController@export')->name('stokcuptip.export');
     });
+
+    Route::group(['prefix' => 'stokcuptip2'], function () {
+        Route::get('/', 'Str2StokCuptipController@index')->name('stokcuptip2.index');
+        Route::get('/list', 'Str2StokCuptipController@list')->name('stokcuptip2.list');
+        Route::post('/create', 'Str2StokCuptipController@store')->name('stokcuptip2.store');
+        Route::get('/edit', 'Str2StokCuptipController@edit')->name('stokcuptip2.edit');
+        Route::post('/update', 'Str2StokCuptipController@update')->name('stokcuptip2.update');
+        Route::post('/delete', 'Str2StokCuptipController@destroy')->name('stokcuptip2.destroy');
+        Route::get('users/export', 'Str2StokCuptipController@export')->name('stokcuptip2.export');
+    });
+
 
     Route::group(['prefix' => 'strout'], function () {
         Route::get('/', 'StrOutController@index')->name('strout.index');
@@ -2014,6 +2078,26 @@ Route::group(['middleware' => ['auth']], function () {
         // Route::get('/getDetails3', 'StrKanbanController@getDetails3')->name('kanban.getDetails3');
         // Route::get('/kanban/save-selection', 'StrKanbanController@saveSelection')->name('kanban.saveSelection');
         Route::post('/kanban/save-selection', [StrKanbanController::class, 'saveSelection'])->name('kanban.saveSelection');
+    });
+
+    Route::group(['prefix' => 'kanbanasi2'], function () {
+        Route::get('/', 'Str2KanbanController@index')->name('kanbanasi2.index');
+        Route::get('/get-new-data', 'Str2KanbanController@getNewData')->name('kanbanasi2.getNewData');
+        Route::get('/getDetails', 'Str2KanbanController@getDetails')->name('kanbanasi2.getDetails');
+        // Route::get('/get-new-data3', 'Str2KanbanController@getNewData3')->name('kanban.getNewData3');
+        // Route::get('/getDetails3', 'Str2KanbanController@getDetails3')->name('kanban.getDetails3');
+        // Route::get('/kanban/save-selection', 'Str2KanbanController@saveSelection')->name('kanban.saveSelection');
+        // Route::post('/kanban/save-selection', [Str2KanbanController::class, 'saveSelection'])->name('kanbanasi2.saveSelection');
+    });
+
+    Route::group(['prefix' => 'kanban2'], function () {
+        Route::get('/', 'StrKanban2Controller@index')->name('kanban2.index');
+        Route::get('/get-new-data', 'StrKanban2Controller@getNewData')->name('kanban2.getNewData');
+        Route::get('/getDetails', 'StrKanban2Controller@getDetails')->name('kanban2.getDetails');
+        Route::get('/get-new-data3', 'StrKanbanController@getNewData3')->name('kanban.getNewData3');
+        Route::get('/getDetails3', 'StrKanbanController@getDetails3')->name('kanban.getDetails3');
+        // Route::get('/kanban/save-selection', 'StrKanbanController@saveSelection')->name('kanban.saveSelection');
+        Route::post('/kanban/save-selection', [StrKanban2Controller::class, 'saveSelection'])->name('kanban2.saveSelection');
     });
 
     Route::group(['prefix' => 'strout2'], function () {
