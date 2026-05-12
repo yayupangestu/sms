@@ -2266,6 +2266,238 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'strout12'], function () {
+        Route::get('/', 'StrOut12Controller@index')->name('strout12.index');
+        Route::get('/list', 'StrOut12Controller@list')->name('strout12.list');
+        Route::get('/edit2', 'StrOut12Controller@edit2')->name('strout12.edit2');
+        Route::get('/getdoc', 'StrOut12Controller@getdoc')->name('strout12.getdoc');
+        Route::get('/listdetail', 'StrOut12Controller@listdetail')->name('strout12.listdetail');
+        Route::get('/listdetail2', 'StrOut12Controller@listdetail2')->name('strout12.listdetail2');
+        Route::get('/listdetail3', 'StrOut12Controller@listdetail3')->name('strout12.listdetail3');
+        Route::post('/create', 'StrOut12Controller@store')->name('strout12.store');
+        Route::post('/submit', 'StrOut12Controller@submit')->name('strout12.submit');
+        Route::post('/delete_draft', 'StrOut12Controller@delete_draft')->name('strout12.delete_draft');
+        Route::get('/edit', 'StrOut12Controller@edit')->name('strout12.edit');
+        Route::post('/delete', 'StrOut12Controller@destroy')->name('strout12.destroy');
+        Route::post('/deleteline', 'StrOut12Controller@destroyline')->name('strout12.destroyline');
+        Route::post('/update', 'StrOut12Controller@update')->name('strout12.update');
+        Route::post('/update2', 'StrOut12Controller@update2')->name('strout12.update2');
+        Route::post('/approve', [StrOut12Controller::class, 'approve'])->name('strout12.approve');
+        Route::post('/strout12/approve2', [StrOut12Controller::class, 'approve2'])->name('strout12.approve2');
+        Route::post('/strout12/approve3', [StrOut12Controller::class, 'approve3'])->name('strout12.approve3');
+        Route::get('/export', 'StrOut12Controller@export')->name('strout12.export');
+        Route::get('/strout12/export-summary', [StrOut12Controller::class, 'exportSummary'])->name('strout12.export.summary');
+        Route::get('/get-actual', [StrOut12Controller::class, 'getActual'])->name('strout12.getActual');
+        Route::post('/saveChecked', 'StrOut12Controller@saveChecked')->name('strout12.saveChecked');
+    });
+
+    Route::group(['prefix' => 'strout13'], function () {
+        Route::get('/', 'StrOut13Controller@index')->name('strout13.index');
+        Route::get('/list', 'StrOut13Controller@list')->name('strout13.list');
+        Route::get('/edit2', 'StrOut13Controller@edit2')->name('strout13.edit2');
+        Route::get('/getdoc', 'StrOut13Controller@getdoc')->name('strout13.getdoc');
+        Route::get('/listdetail', 'StrOut13Controller@listdetail')->name('strout13.listdetail');
+        Route::get('/listdetail2', 'StrOut13Controller@listdetail2')->name('strout13.listdetail2');
+        Route::get('/listdetail3', 'StrOut13Controller@listdetail3')->name('strout13.listdetail3');
+        Route::post('/create', 'StrOut13Controller@store')->name('strout13.store');
+        Route::post('/submit', 'StrOut13Controller@submit')->name('strout13.submit');
+        Route::post('/delete_draft', 'StrOut13Controller@delete_draft')->name('strout13.delete_draft');
+        Route::get('/edit', 'StrOut13Controller@edit')->name('strout13.edit');
+        Route::post('/delete', 'StrOut13Controller@destroy')->name('strout13.destroy');
+        Route::post('/deleteline', 'StrOut13Controller@destroyline')->name('strout13.destroyline');
+        Route::post('/update', 'StrOut13Controller@update')->name('strout13.update');
+        Route::post('/update2', 'StrOut13Controller@update2')->name('strout13.update2');
+        Route::post('/approve', [StrOut13Controller::class, 'approve'])->name('strout13.approve');
+        Route::post('/strout13/approve2', [StrOut13Controller::class, 'approve2'])->name('strout13.approve2');
+        Route::post('/strout13/approve3', [StrOut13Controller::class, 'approve3'])->name('strout13.approve3');
+        Route::get('/export', 'StrOut13Controller@export')->name('strout13.export');
+        Route::get('/strout13/export-summary', [StrOut13Controller::class, 'exportSummary'])->name('strout13.export.summary');
+        Route::get('/get-actual', [StrOut13Controller::class, 'getActual'])->name('strout13.getActual');
+        Route::post('/saveChecked', 'StrOut13Controller@saveChecked')->name('strout13.saveChecked');
+    });
+
+    Route::group(['prefix' => 'strout14'], function () {
+        Route::get('/', 'StrOut14Controller@index')->name('strout14.index');
+        Route::get('/list', 'StrOut14Controller@list')->name('strout14.list');
+        Route::get('/edit2', 'StrOut14Controller@edit2')->name('strout14.edit2');
+        Route::get('/getdoc', 'StrOut14Controller@getdoc')->name('strout14.getdoc');
+        Route::get('/listdetail', 'StrOut14Controller@listdetail')->name('strout14.listdetail');
+        Route::get('/listdetail2', 'StrOut14Controller@listdetail2')->name('strout14.listdetail2');
+        Route::get('/listdetail3', 'StrOut14Controller@listdetail3')->name('strout14.listdetail3');
+        Route::post('/create', 'StrOut14Controller@store')->name('strout14.store');
+        Route::post('/submit', 'StrOut14Controller@submit')->name('strout14.submit');
+        Route::post('/delete_draft', 'StrOut14Controller@delete_draft')->name('strout14.delete_draft');
+        Route::get('/edit', 'StrOut14Controller@edit')->name('strout14.edit');
+        Route::post('/delete', 'StrOut14Controller@destroy')->name('strout14.destroy');
+        Route::post('/deleteline', 'StrOut14Controller@destroyline')->name('strout14.destroyline');
+        Route::post('/update', 'StrOut14Controller@update')->name('strout14.update');
+        Route::post('/update2', 'StrOut14Controller@update2')->name('strout14.update2');
+        Route::post('/approve', [StrOut14Controller::class, 'approve'])->name('strout14.approve');
+        Route::post('/strout14/approve2', [StrOut14Controller::class, 'approve2'])->name('strout14.approve2');
+        Route::post('/strout14/approve3', [StrOut14Controller::class, 'approve3'])->name('strout14.approve3');
+        Route::get('/export', 'StrOut14Controller@export')->name('strout14.export');
+        Route::get('/strout14/export-summary', [StrOut14Controller::class, 'exportSummary'])->name('strout14.export.summary');
+        Route::get('/get-actual', [StrOut14Controller::class, 'getActual'])->name('strout14.getActual');
+        Route::post('/saveChecked', 'StrOut14Controller@saveChecked')->name('strout14.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout15'], function () {
+        Route::get('/', 'StrOut15Controller@index')->name('strout15.index');
+        Route::get('/list', 'StrOut15Controller@list')->name('strout15.list');
+        Route::get('/edit2', 'StrOut15Controller@edit2')->name('strout15.edit2');
+        Route::get('/getdoc', 'StrOut15Controller@getdoc')->name('strout15.getdoc');
+        Route::get('/listdetail', 'StrOut15Controller@listdetail')->name('strout15.listdetail');
+        Route::get('/listdetail2', 'StrOut15Controller@listdetail2')->name('strout15.listdetail2');
+        Route::get('/listdetail3', 'StrOut15Controller@listdetail3')->name('strout15.listdetail3');
+        Route::post('/create', 'StrOut15Controller@store')->name('strout15.store');
+        Route::post('/submit', 'StrOut15Controller@submit')->name('strout15.submit');
+        Route::post('/delete_draft', 'StrOut15Controller@delete_draft')->name('strout15.delete_draft');
+        Route::get('/edit', 'StrOut15Controller@edit')->name('strout15.edit');
+        Route::post('/delete', 'StrOut15Controller@destroy')->name('strout15.destroy');
+        Route::post('/deleteline', 'StrOut15Controller@destroyline')->name('strout15.destroyline');
+        Route::post('/update', 'StrOut15Controller@update')->name('strout15.update');
+        Route::post('/update2', 'StrOut15Controller@update2')->name('strout15.update2');
+        Route::post('/approve', [StrOut15Controller::class, 'approve'])->name('strout15.approve');
+        Route::post('/strout15/approve2', [StrOut15Controller::class, 'approve2'])->name('strout15.approve2');
+        Route::post('/strout15/approve3', [StrOut15Controller::class, 'approve3'])->name('strout15.approve3');
+        Route::get('/export', 'StrOut15Controller@export')->name('strout15.export');
+        Route::get('/strout15/export-summary', [StrOut15Controller::class, 'exportSummary'])->name('strout15.export.summary');
+        Route::get('/get-actual', [StrOut15Controller::class, 'getActual'])->name('strout15.getActual');
+        Route::post('/saveChecked', 'StrOut15Controller@saveChecked')->name('strout15.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout16'], function () {
+        Route::get('/', 'StrOut16Controller@index')->name('strout16.index');
+        Route::get('/list', 'StrOut16Controller@list')->name('strout16.list');
+        Route::get('/edit2', 'StrOut16Controller@edit2')->name('strout16.edit2');
+        Route::get('/getdoc', 'StrOut16Controller@getdoc')->name('strout16.getdoc');
+        Route::get('/listdetail', 'StrOut16Controller@listdetail')->name('strout16.listdetail');
+        Route::get('/listdetail2', 'StrOut16Controller@listdetail2')->name('strout16.listdetail2');
+        Route::get('/listdetail3', 'StrOut16Controller@listdetail3')->name('strout16.listdetail3');
+        Route::post('/create', 'StrOut16Controller@store')->name('strout16.store');
+        Route::post('/submit', 'StrOut16Controller@submit')->name('strout16.submit');
+        Route::post('/delete_draft', 'StrOut16Controller@delete_draft')->name('strout16.delete_draft');
+        Route::get('/edit', 'StrOut16Controller@edit')->name('strout16.edit');
+        Route::post('/delete', 'StrOut16Controller@destroy')->name('strout16.destroy');
+        Route::post('/deleteline', 'StrOut16Controller@destroyline')->name('strout16.destroyline');
+        Route::post('/update', 'StrOut16Controller@update')->name('strout16.update');
+        Route::post('/update2', 'StrOut16Controller@update2')->name('strout16.update2');
+        Route::post('/approve', [StrOut16Controller::class, 'approve'])->name('strout16.approve');
+        Route::post('/strout16/approve2', [StrOut16Controller::class, 'approve2'])->name('strout16.approve2');
+        Route::post('/strout16/approve3', [StrOut16Controller::class, 'approve3'])->name('strout16.approve3');
+        Route::get('/export', 'StrOut16Controller@export')->name('strout16.export');
+        Route::get('/strout16/export-summary', [StrOut16Controller::class, 'exportSummary'])->name('strout16.export.summary');
+        Route::get('/get-actual', [StrOut16Controller::class, 'getActual'])->name('strout16.getActual');
+        Route::post('/saveChecked', 'StrOut16Controller@saveChecked')->name('strout16.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout17'], function () {
+        Route::get('/', 'StrOut17Controller@index')->name('strout17.index');
+        Route::get('/list', 'StrOut17Controller@list')->name('strout17.list');
+        Route::get('/edit2', 'StrOut17Controller@edit2')->name('strout17.edit2');
+        Route::get('/getdoc', 'StrOut17Controller@getdoc')->name('strout17.getdoc');
+        Route::get('/listdetail', 'StrOut17Controller@listdetail')->name('strout17.listdetail');
+        Route::get('/listdetail2', 'StrOut17Controller@listdetail2')->name('strout17.listdetail2');
+        Route::get('/listdetail3', 'StrOut17Controller@listdetail3')->name('strout17.listdetail3');
+        Route::post('/create', 'StrOut17Controller@store')->name('strout17.store');
+        Route::post('/submit', 'StrOut17Controller@submit')->name('strout17.submit');
+        Route::post('/delete_draft', 'StrOut17Controller@delete_draft')->name('strout17.delete_draft');
+        Route::get('/edit', 'StrOut17Controller@edit')->name('strout17.edit');
+        Route::post('/delete', 'StrOut17Controller@destroy')->name('strout17.destroy');
+        Route::post('/deleteline', 'StrOut17Controller@destroyline')->name('strout17.destroyline');
+        Route::post('/update', 'StrOut17Controller@update')->name('strout17.update');
+        Route::post('/update2', 'StrOut17Controller@update2')->name('strout17.update2');
+        Route::post('/approve', [StrOut17Controller::class, 'approve'])->name('strout17.approve');
+        Route::post('/strout17/approve2', [StrOut17Controller::class, 'approve2'])->name('strout17.approve2');
+        Route::post('/strout17/approve3', [StrOut17Controller::class, 'approve3'])->name('strout17.approve3');
+        Route::get('/export', 'StrOut17Controller@export')->name('strout17.export');
+        Route::get('/strout17/export-summary', [StrOut17Controller::class, 'exportSummary'])->name('strout17.export.summary');
+        Route::get('/get-actual', [StrOut17Controller::class, 'getActual'])->name('strout17.getActual');
+        Route::post('/saveChecked', 'StrOut17Controller@saveChecked')->name('strout17.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout18'], function () {
+        Route::get('/', 'StrOut18Controller@index')->name('strout18.index');
+        Route::get('/list', 'StrOut18Controller@list')->name('strout18.list');
+        Route::get('/edit2', 'StrOut18Controller@edit2')->name('strout18.edit2');
+        Route::get('/getdoc', 'StrOut18Controller@getdoc')->name('strout18.getdoc');
+        Route::get('/listdetail', 'StrOut18Controller@listdetail')->name('strout18.listdetail');
+        Route::get('/listdetail2', 'StrOut18Controller@listdetail2')->name('strout18.listdetail2');
+        Route::get('/listdetail3', 'StrOut18Controller@listdetail3')->name('strout18.listdetail3');
+        Route::post('/create', 'StrOut18Controller@store')->name('strout18.store');
+        Route::post('/submit', 'StrOut18Controller@submit')->name('strout18.submit');
+        Route::post('/delete_draft', 'StrOut18Controller@delete_draft')->name('strout18.delete_draft');
+        Route::get('/edit', 'StrOut18Controller@edit')->name('strout18.edit');
+        Route::post('/delete', 'StrOut18Controller@destroy')->name('strout18.destroy');
+        Route::post('/deleteline', 'StrOut18Controller@destroyline')->name('strout18.destroyline');
+        Route::post('/update', 'StrOut18Controller@update')->name('strout18.update');
+        Route::post('/update2', 'StrOut18Controller@update2')->name('strout18.update2');
+        Route::post('/approve', [StrOut18Controller::class, 'approve'])->name('strout18.approve');
+        Route::post('/strout18/approve2', [StrOut18Controller::class, 'approve2'])->name('strout18.approve2');
+        Route::post('/strout18/approve3', [StrOut18Controller::class, 'approve3'])->name('strout18.approve3');
+        Route::get('/export', 'StrOut18Controller@export')->name('strout18.export');
+        Route::get('/strout18/export-summary', [StrOut18Controller::class, 'exportSummary'])->name('strout18.export.summary');
+        Route::get('/get-actual', [StrOut18Controller::class, 'getActual'])->name('strout18.getActual');
+        Route::post('/saveChecked', 'StrOut18Controller@saveChecked')->name('strout18.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout19'], function () {
+        Route::get('/', 'StrOut19Controller@index')->name('strout19.index');
+        Route::get('/list', 'StrOut19Controller@list')->name('strout19.list');
+        Route::get('/edit2', 'StrOut19Controller@edit2')->name('strout19.edit2');
+        Route::get('/getdoc', 'StrOut19Controller@getdoc')->name('strout19.getdoc');
+        Route::get('/listdetail', 'StrOut19Controller@listdetail')->name('strout19.listdetail');
+        Route::get('/listdetail2', 'StrOut19Controller@listdetail2')->name('strout19.listdetail2');
+        Route::get('/listdetail3', 'StrOut19Controller@listdetail3')->name('strout19.listdetail3');
+        Route::post('/create', 'StrOut19Controller@store')->name('strout19.store');
+        Route::post('/submit', 'StrOut19Controller@submit')->name('strout19.submit');
+        Route::post('/delete_draft', 'StrOut19Controller@delete_draft')->name('strout19.delete_draft');
+        Route::get('/edit', 'StrOut19Controller@edit')->name('strout19.edit');
+        Route::post('/delete', 'StrOut19Controller@destroy')->name('strout19.destroy');
+        Route::post('/deleteline', 'StrOut19Controller@destroyline')->name('strout19.destroyline');
+        Route::post('/update', 'StrOut19Controller@update')->name('strout19.update');
+        Route::post('/update2', 'StrOut19Controller@update2')->name('strout19.update2');
+        Route::post('/approve', [StrOut19Controller::class, 'approve'])->name('strout19.approve');
+        Route::post('/strout19/approve2', [StrOut19Controller::class, 'approve2'])->name('strout19.approve2');
+        Route::post('/strout19/approve3', [StrOut19Controller::class, 'approve3'])->name('strout19.approve3');
+        Route::get('/export', 'StrOut19Controller@export')->name('strout19.export');
+        Route::get('/strout19/export-summary', [StrOut19Controller::class, 'exportSummary'])->name('strout19.export.summary');
+        Route::get('/get-actual', [StrOut19Controller::class, 'getActual'])->name('strout19.getActual');
+        Route::post('/saveChecked', 'StrOut19Controller@saveChecked')->name('strout19.saveChecked');
+
+    });
+
+    Route::group(['prefix' => 'strout20'], function () {
+        Route::get('/', 'StrOut20Controller@index')->name('strout20.index');
+        Route::get('/list', 'StrOut20Controller@list')->name('strout20.list');
+        Route::get('/edit2', 'StrOut20Controller@edit2')->name('strout20.edit2');
+        Route::get('/getdoc', 'StrOut20Controller@getdoc')->name('strout20.getdoc');
+        Route::get('/listdetail', 'StrOut20Controller@listdetail')->name('strout20.listdetail');
+        Route::get('/listdetail2', 'StrOut20Controller@listdetail2')->name('strout20.listdetail2');
+        Route::get('/listdetail3', 'StrOut20Controller@listdetail3')->name('strout20.listdetail3');
+        Route::post('/create', 'StrOut20Controller@store')->name('strout20.store');
+        Route::post('/submit', 'StrOut20Controller@submit')->name('strout20.submit');
+        Route::post('/delete_draft', 'StrOut20Controller@delete_draft')->name('strout20.delete_draft');
+        Route::get('/edit', 'StrOut20Controller@edit')->name('strout20.edit');
+        Route::post('/delete', 'StrOut20Controller@destroy')->name('strout20.destroy');
+        Route::post('/deleteline', 'StrOut20Controller@destroyline')->name('strout20.destroyline');
+        Route::post('/update', 'StrOut20Controller@update')->name('strout20.update');
+        Route::post('/update2', 'StrOut20Controller@update2')->name('strout20.update2');
+        Route::post('/approve', [StrOut20Controller::class, 'approve'])->name('strout20.approve');
+        Route::post('/strout20/approve2', [StrOut20Controller::class, 'approve2'])->name('strout20.approve2');
+        Route::post('/strout20/approve3', [StrOut20Controller::class, 'approve3'])->name('strout20.approve3');
+        Route::get('/export', 'StrOut20Controller@export')->name('strout20.export');
+        Route::get('/strout20/export-summary', [StrOut20Controller::class, 'exportSummary'])->name('strout20.export.summary');
+        Route::get('/get-actual', [StrOut20Controller::class, 'getActual'])->name('strout20.getActual');
+        Route::post('/saveChecked', 'StrOut20Controller@saveChecked')->name('strout20.saveChecked');
+
+    });
+
 
 });
 
