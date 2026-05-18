@@ -26,12 +26,6 @@
 
   @stack('stylesheets')
 
-  {{-- <style>
-    body {
-      background-color: #ffffff; /* Ganti dengan kode warna yang Anda inginkan */
-      padding: 10px; 
-    }
-  </style> --}}
 </head>
 <body style="background-color: #151414" class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 @include('sweetalert::alert')

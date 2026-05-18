@@ -1,35 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\StrStokAtk;
-use App\Models\StrStokRtk;
-use App\Models\StrStokConsum;
-use App\Models\StrStokCuptip;
-use App\Models\StrStokGas;
-use App\Models\StrStokTi;
+
+use Illuminate\Http\Request;
+use App\Models\Str2StokAtk;
+use App\Models\Str2StokRtk;
+use App\Models\Str2StokConsum;
+use App\Models\Str2StokCuptip;
+use App\Models\Str2StokGas;
+use App\Models\Str2StokTi;
 use App\Models\Departement;
 use App\Models\StrBarang;
-use App\Models\StrOut2;
+use App\Models\Str2Out2;
 use App\Models\StrCategory;
 use App\Models\StrUom;
 use App\Models\User;
-use Illuminate\Http\Request;
-use App\Exports\ItemsOut2Export;
-use App\Exports\ItemsOut2SummaryExport;
+use App\Exports\ItemsOut2ExportStr2;
 use RealRashid\SweetAlert\Facades\Alert;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-// use DB;
-
-
-class StrOut2Controller extends Controller
+class Str2Out2Controller extends Controller
 {
     public function index()
     {
-        $title = 'Item Out Store Room ';
+        $title = 'Item Out Line C';
         $departements = Departement::all();
         $users = User::all();
         $str_uoms = StrUom::all();
@@ -43,34 +40,12 @@ class StrOut2Controller extends Controller
 
         Alert::info('NOTE:', 'Penukaran Barang Harap Membawa Bekasnya', );
 
-        return view('storeroom.out2', compact('title', 'departements', 'str_uoms', 'master_list_strs', 'users'));
+        return view('store2.out2', compact('title', 'departements', 'str_uoms', 'master_list_strs', 'users'));
     }
-
-    // OPIS KEDUA
-    // public function index()
-    // {
-    //     $title = 'Item Out Store Room ';
-    //     $departements = Departement::all();
-    //     $users = User::all();
-    //     $str_uoms = StrUom::all();
-    //     // Mengambil barang yang sering dipilih berdasarkan jumlah transaksi
-    //     $master_list_strs = DB::table('master_list_strs as a')
-    //         ->select('a.id', 'a.name', 'b.name as category', DB::raw('COUNT(c.id) as transaction_count'))
-    //         ->join('str_categories as b', 'b.id', '=', 'a.category', 'left')
-    //         ->join('str_out2s as c', 'c.item_id', '=', 'a.id', 'left') // Join dengan tabel transaksi
-    //         ->groupBy('a.id', 'a.name', 'b.name')
-    //         ->orderBy('transaction_count', 'desc') // Urutkan berdasarkan jumlah transaksi
-    //         ->limit(20) // Batas barang yang ditampilkan (misal: top 10)
-    //         ->get();
-
-    //     Alert::info('NOTE:', 'Penukaran Barang Harap Membawa Bekasnya',);
-
-    //     return view('storeroom.out2', compact('title', 'departements', 'str_uoms', 'master_list_strs', 'users'));
-    // }
 
     public function list()
     {
-        $query = DB::table('str_out2s as a')
+        $query = DB::table('str2_out2s as a')
             ->select('a.date_plan', 'a.doc_no', 'a.line_id', 'c.name as createdby', DB::raw('GROUP_CONCAT(a.status) as status'), DB::raw('MAX(a.created_at) as created_at'))
             ->join('users as c', 'c.id', '=', 'a.createdby', 'left')
             ->where('a.sts', 1)
@@ -98,7 +73,7 @@ class StrOut2Controller extends Controller
                 $data['updateby'] = auth()->user()->id;
                 // $data['material_id'] = $request->rm[$i];
 
-                StrOut2::where('id', $request->idline[$i])->where('id', $request->idket[$i])->update($data);
+                Str2Out2::where('id', $request->idline[$i])->where('id', $request->idket[$i])->update($data);
             }
             alert()->success('Success', 'Update data success');
             return back();
@@ -108,7 +83,7 @@ class StrOut2Controller extends Controller
 
     public function listdetail(Request $request)
     {
-        $query = DB::table('str_out2s as a')
+        $query = DB::table('str2_out2s as a')
             ->select('a.id', 'c.name', 'a.qty_return', 'a.qty_standing', 'a.qty_request', 'a.keterangan', 'd.name as satuan', 'e.description as line_id', 's.username as createdby')
             // ->join('depts as b', 'b.id', '=', 'a.line_id', 'left')
             ->join('master_list_strs as c', 'c.id', '=', 'a.item_id', 'left')
@@ -124,13 +99,13 @@ class StrOut2Controller extends Controller
 
     public function listdetail2(Request $request)
     {
-        $query = DB::table('str_out2s as a')
+        $query = DB::table('str2_out2s as a')
             ->select('a.id', 'c.name', 'a.qty_return', 'a.qty_standing', 'a.qty_request', 'a.keterangan', 'd.name as satuan', 'e.description as line_id', 'a.qty_out', 'a.keterangan', 'a.w_dibuat', 'f.username as createdby', 'a.line_id', 'a.date_plan')
             // ->join('depts as b', 'b.id', '=', 'a.line_id', 'left')
             ->join('master_list_strs as c', 'c.id', '=', 'a.item_id', 'left')
             ->join('str_uoms as d', 'd.id', '=', 'a.satuan', 'left')
             ->join('departements as e', 'e.id', '=', 'a.line_id', 'left')
-            ->join('users as f', 'f.id', '=', 'a.createdby', 'left')
+            ->join('users as f', 'f.id', '=', 'a.createdby')
             ->where('a.doc_no', $request->doc_no)
             ->get();
         return DataTables::of($query)->make();
@@ -138,7 +113,7 @@ class StrOut2Controller extends Controller
 
     public function listdetail3(Request $request)
     {
-        $query = DB::table('str_out2s as a')
+        $query = DB::table('str2_out2s as a')
             ->select(
                 'a.id',
                 'a.date_plan',
@@ -159,82 +134,37 @@ class StrOut2Controller extends Controller
             ->join('master_list_strs as c', 'c.id', '=', 'a.item_id', 'left')
             ->join('str_uoms as d', 'd.id', '=', 'a.satuan', 'left')
             ->join('departements as e', 'e.id', '=', 'a.line_id', 'left')
-            ->join('users as f', 'f.id', '=', 'a.createdby', 'left')
+            ->join('users as f', 'f.id', '=', 'a.createdby')
             ->where('a.doc_no', $request->doc_no)
             ->get();
 
         return response()->json($query); // Return the query as JSON response
     }
 
-
-
     public function getdoc()
     {
-        $yearMonth = date('Ym');
-
-        $lastDoc = StrOut2::where('doc_no', 'like', "%/$yearMonth/%")
-            ->orderBy('created_at', 'desc')
-            ->value('doc_no');
-
-        if ($lastDoc) {
-            // ambil angka terakhir setelah /
-            $lastNumber = (int) substr($lastDoc, strrpos($lastDoc, '/') + 1);
-            $nextNumber = $lastNumber + 1;
+        $cek = Str2Out2::select(DB::raw('COUNT(doc_no) as jml'))->whereMonth('created_at', date('m'))->groupBy('doc_no')->count();
+        if ($cek > 0) {
+            $array = array();
+            $rows = Str2Out2::select('doc_no')->whereMonth('created_at', date('m'))->groupBy('doc_no')->get();
+            foreach ($rows as $key => $value) {
+                $array[] = $value->doc_no;
+            }
+            $arr_doc = count($array);
+            return response()->json([
+                'jml' => $arr_doc + 1
+            ]);
         } else {
-            $nextNumber = 1;
+            return response()->json([
+                'jml' => 1
+            ]);
         }
-
-        return response()->json([
-            'jml' => str_pad($nextNumber, 3, '0', STR_PAD_LEFT)
-        ]);
     }
-
-    // public function store(Request $request)
-    // {
-    //     // Ambil harga (price) dari tabel master_list_strs berdasarkan item_id
-    //     $barang = DB::table('master_list_strs')->where('id', $request->item_id)->first();
-
-    //     if (!$barang) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'msg' => 'Item not found.',
-    //         ]);
-    //     }
-
-    //     $priceItem = $request->qty_request * $barang->price; // Hitung price_item
-
-    //     $out = new StrOut2();
-    //     $out->doc_no = $request->doc_no;
-    //     $out->date_plan = $request->date_plan;
-    //     $out->line_id = $request->line_id;
-    //     $out->item_id = $request->item_id;
-    //     $out->qty_return = $request->qty_return;
-    //     $out->qty_standing = $request->qty_standing;
-    //     $out->qty_request = $request->qty_request;
-    //     $out->price_item = $priceItem; // Simpan hasil ke kolom price_item
-    //     $out->keterangan = $request->keterangan;
-    //     $out->satuan = $request->satuan;
-    //     $out->createdby = auth()->user()->id;
-
-    //     if ($out->save()) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'msg' => 'Insert success.',
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'success' => false,
-    //             'msg' => 'Insert failed.',
-    //         ]);
-    //     }
-    // }
 
     public function store(Request $request)
     {
-        // Ambil harga item
-        $barang = DB::table('master_list_strs')
-            ->where('id', $request->item_id)
-            ->first();
+        // Ambil harga (price) dari tabel master_list_strs berdasarkan item_id
+        $barang = DB::table('master_list_strs')->where('id', $request->item_id)->first();
 
         if (!$barang) {
             return response()->json([
@@ -243,36 +173,17 @@ class StrOut2Controller extends Controller
             ]);
         }
 
-        $qtyRequest = (int) $request->qty_request;
-        $qtyReturn = (int) $request->qty_return;
+        $priceItem = $request->qty_request * $barang->price; // Hitung price_item
 
-        // ===============================
-        // LOGIC PENENTUAN QTY_OUT
-        // ===============================
-        if (empty($qtyReturn) || $qtyReturn == 0) {
-            $qtyOut = $qtyRequest;
-        } elseif ($qtyReturn == $qtyRequest) {
-            $qtyOut = $qtyRequest;
-        } elseif ($qtyReturn < $qtyRequest) {
-            $qtyOut = $qtyReturn;
-        } else {
-            // Optional safety (jika input aneh)
-            $qtyOut = $qtyRequest;
-        }
-
-        // Hitung price item
-        $priceItem = $qtyRequest * $barang->price;
-
-        $out = new StrOut2();
+        $out = new Str2Out2();
         $out->doc_no = $request->doc_no;
         $out->date_plan = $request->date_plan;
         $out->line_id = $request->line_id;
         $out->item_id = $request->item_id;
-        $out->qty_return = $qtyReturn;
+        $out->qty_return = $request->qty_return;
         $out->qty_standing = $request->qty_standing;
-        $out->qty_request = $qtyRequest;
-        $out->qty_out = $qtyOut;          // 👈 hasil logic
-        $out->price_item = $priceItem;
+        $out->qty_request = $request->qty_request;
+        $out->price_item = $priceItem; // Simpan hasil ke kolom price_item
         $out->keterangan = $request->keterangan;
         $out->satuan = $request->satuan;
         $out->createdby = auth()->user()->id;
@@ -282,67 +193,55 @@ class StrOut2Controller extends Controller
                 'success' => true,
                 'msg' => 'Insert success.',
             ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Insert failed.',
+            ]);
         }
-
-        return response()->json([
-            'success' => false,
-            'msg' => 'Insert failed.',
-        ]);
     }
 
     public function update2(Request $request)
     {
-        if ($request->bulk) {
-            $items = $request->items;
-            if (empty($items)) {
-                return response()->json(['success' => false, 'msg' => 'No items provided']);
-            }
+        // Ambil harga (price) dari tabel master_list_strs berdasarkan item_id
+        $barang = DB::table('master_list_strs')->where('id', $request->item_id)->first();
 
-            DB::beginTransaction();
-            try {
-                foreach ($items as $v) {
-                    $item = StrOut2::find($v['id']);
-                    if ($item) {
-                        $qty_request = (int) $item->qty_request;
-                        $qty_out = (int) $v['qty_out'];
-                        $item->qty_out = $qty_out;
-                        $item->qty_standing = $qty_request - $qty_out;
-                        $item->keterangan = $v['keterangan'];
-                        $item->updateby = auth()->user()->id;
-                        $item->save();
-                    }
-                }
-                DB::commit();
-                return response()->json(['success' => true, 'msg' => 'Bulk update success']);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                return response()->json(['success' => false, 'msg' => 'Bulk update failed: ' . $e->getMessage()]);
-            }
+        if (!$barang) {
+            return response()->json([
+                'success' => false,
+                'msg' => 'Item not found.',
+            ]);
+        }
+
+        $priceItem = $request->qty_request * $barang->price; // Hitung price_item
+
+        $data = [
+            'item_id' => $request->item_id,
+            'qty_request' => $request->qty_request,
+            'qty_return' => $request->qty_return,
+            'satuan' => $request->satuan,
+            'price_item' => $priceItem, // Update kolom price_item
+            'updateby' => auth()->user()->id,
+        ];
+
+        $query = Str2Out2::where('id', $request->id)->update($data);
+
+        if ($query) {
+            return response()->json([
+                'success' => true,
+                'msg' => 'Edit success.',
+            ]);
         } else {
-            $item = StrOut2::find($request->id);
-            if (!$item) {
-                return response()->json(['success' => false, 'msg' => 'Item not found']);
-            }
-
-            $qty_request = (int) $item->qty_request;
-            $qty_out = (int) $request->qty_out;
-
-            $item->qty_out = $qty_out;
-            $item->qty_standing = $qty_request - $qty_out;
-            $item->keterangan = $request->keterangan;
-            $item->updateby = auth()->user()->id;
-
-            if ($item->save()) {
-                return response()->json(['success' => true, 'msg' => 'Update success']);
-            } else {
-                return response()->json(['success' => false, 'msg' => 'Update failed']);
-            }
+            return response()->json([
+                'success' => false,
+                'msg' => 'Edit failed.',
+            ]);
         }
     }
 
     public function updatePriceItems()
     {
-        $outItems = StrOut2::all();
+        $outItems = Str2Out2::all();
 
         foreach ($outItems as $item) {
             $barang = DB::table('master_list_strs')->where('id', $item->item_id)->first();
@@ -359,9 +258,22 @@ class StrOut2Controller extends Controller
         ]);
     }
 
+    public function export(Request $request)
+    {
+        $validated = $request->validate([
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+        ]);
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        return Excel::download(new ItemsOut2ExportStr2($startDate, $endDate), 'Penggunaan Barang LINE C ASI-2.xlsx');
+    }
+
     public function destroyline(Request $request)
     {
-        $query = StrOut2::where('id', $request->id)->delete();
+        $query = Str2Out2::where('id', $request->id)->delete();
         if ($query) {
             return response()->json([
                 'success' => true,
@@ -377,9 +289,9 @@ class StrOut2Controller extends Controller
 
     public function edit2(Request $request)
     {
-        $cek = StrOut2::where('id', $request->id)->count();
+        $cek = Str2Out2::where('id', $request->id)->count();
         if ($cek > 0) {
-            $row = StrOut2::where('id', $request->id)->first();
+            $row = Str2Out2::where('id', $request->id)->first();
             return response()->json([
                 'success' => true,
                 'id' => $row->id,
@@ -398,7 +310,7 @@ class StrOut2Controller extends Controller
 
     public function destroy(Request $request)
     {
-        $query = StrOut2::where('doc_no', $request->doc_no)->delete();
+        $query = Str2Out2::where('doc_no', $request->doc_no)->delete();
         if ($query) {
             return response()->json([
                 'success' => true,
@@ -414,10 +326,10 @@ class StrOut2Controller extends Controller
 
     public function submit(Request $request)
     {
-        $cek = StrOut2::where('doc_no', $request->doc_no)->count();
+        $cek = Str2Out2::where('doc_no', $request->doc_no)->count();
         if ($cek > 0) {
             $data['sts'] = 1;
-            $query = StrOut2::where('doc_no', $request->doc_no)->update($data);
+            $query = Str2Out2::where('doc_no', $request->doc_no)->update($data);
             if ($query) {
                 return response()->json([
                     'success' => true,
@@ -439,13 +351,13 @@ class StrOut2Controller extends Controller
 
     public function delete_draft(Request $request)
     {
-        $query = StrOut2::where('doc_no', $request->doc_no)->delete();
+        $query = Str2Out2::where('doc_no', $request->doc_no)->delete();
         return back();
     }
 
     public function edit(Request $request)
     {
-        $row = StrOut2::select('date_plan', 'line_id')
+        $row = Str2Out2::select('date_plan', 'line_id')
             ->where('doc_no', $request->doc_no)
             ->first();
         return response()->json([
@@ -463,8 +375,8 @@ class StrOut2Controller extends Controller
         try {
             $doc_no = $request->input('doc_no');
 
-            // Fetch all str_out2s records with the given doc_no
-            $out2Items = StrOut2::where('doc_no', $doc_no)->get();
+            // Fetch all str_out3s records with the given doc_no
+            $out2Items = Str2Out2::where('doc_no', $doc_no)->get();
             if ($out2Items->isEmpty()) {
                 return response()->json(['success' => false, 'message' => 'Records not found']);
             }
@@ -476,16 +388,16 @@ class StrOut2Controller extends Controller
                 Log::info("Approving doc_no: $doc_no, item_id: $item_id, qty_request: $qty_request");
 
                 // Update str_stok_atks and str_stok_rtks using the helper function
-                $this->updateStock(StrStokAtk::class, $item_id, $qty_request);
-                $this->updateStock(StrStokRtk::class, $item_id, $qty_request);
-                $this->updateStock(StrStokConsum::class, $item_id, $qty_request);
-                $this->updateStock(StrStokCuptip::class, $item_id, $qty_request);
-                $this->updateStock(StrStokGas::class, $item_id, $qty_request);
-                $this->updateStock(StrStokTi::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokAtk::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokRtk::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokConsum::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokCuptip::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokGas::class, $item_id, $qty_request);
+                $this->updateStock(Str2StokTi::class, $item_id, $qty_request);
             }
 
             // Update the status of one str_out2 record with the given doc_no to 1
-            $firstOut2 = StrOut2::where('doc_no', $doc_no)->first();
+            $firstOut2 = Str2Out2::where('doc_no', $doc_no)->first();
             if ($firstOut2) {
                 $firstOut2->status = 1; // Example status update
                 $firstOut2->save();
@@ -516,7 +428,7 @@ class StrOut2Controller extends Controller
     public function approve2(Request $request)
     {
         $doc_no = $request->input('doc_no');
-        $strOut2 = StrOut2::where('doc_no', $doc_no)->first();
+        $strOut2 = Str2Out2::where('doc_no', $doc_no)->first();
         if ($strOut2) {
             $strOut2->status = 2;
             $strOut2->save();
@@ -530,7 +442,7 @@ class StrOut2Controller extends Controller
     public function approve3(Request $request)
     {
         $doc_no = $request->input('doc_no');
-        $strOut2 = StrOut2::where('doc_no', $doc_no)->first();
+        $strOut2 = Str2Out2::where('doc_no', $doc_no)->first();
         if ($strOut2) {
             $strOut2->status = 4;
             $strOut2->save();
@@ -541,29 +453,6 @@ class StrOut2Controller extends Controller
         }
     }
 
-    public function export(Request $request)
-    {
-        $validated = $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date',
-        ]);
-
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        return Excel::download(new ItemsOut2Export($startDate, $endDate), 'Penggunaan Item LINE C1&C2.xlsx');
-    }
-
-    public function exportSummary(Request $request)
-    {
-        $start = $request->start_date;
-        $end = $request->end_date;
-
-        return Excel::download(new ItemsOut2SummaryExport($start, $end), 'Summary Item C1&C2.xlsx');
-    }
-
-    // App\Http\Controllers\StrOut2Controller.php
-
     public function getActual(Request $request)
     {
         $itemId = $request->input('item_id');
@@ -572,31 +461,31 @@ class StrOut2Controller extends Controller
         if (!$itemId) {
             return response()->json(['success' => false, 'message' => 'Item ID tidak valid.']);
         }
-        $stock = DB::table('str_stok_atks')->where('item_id', $itemId)->select('actual')->first();
+        $stock = DB::table('str2_stok_atks')->where('item_id', $itemId)->select('actual')->first();
 
         if (!$stock) {
-            $stock = DB::table('str_stok_rtks')->where('item_id', $itemId)->select('actual')->first();
+            $stock = DB::table('str2_stok_rtks')->where('item_id', $itemId)->select('actual')->first();
         }
 
         if (!$stock) {
-            $stock = DB::table('str_stok_consums')->where('item_id', $itemId)->select('actual')->first();
+            $stock = DB::table('str2_stok_consums')->where('item_id', $itemId)->select('actual')->first();
         }
 
         if (!$stock) {
-            $stock = DB::table('str_stok_cuptips')->where('item_id', $itemId)->select('actual')->first();
+            $stock = DB::table('str2_stok_cuptips')->where('item_id', $itemId)->select('actual')->first();
         }
 
         if (!$stock) {
-            $stock = DB::table('str_stok_gases')->where('item_id', $itemId)->select('actual')->first();
+            $stock = DB::table('str2_stok_gases')->where('item_id', $itemId)->select('actual')->first();
         }
 
         if (!$stock) {
-            $stock = DB::table('str_stok_tis')->where('item_id', $itemId)->select('actual')->first();
+            $stock = DB::table('str2_stok_tis')->where('item_id', $itemId)->select('actual')->first();
         }
         if ($stock) {
             return response()->json(['success' => true, 'data' => $stock]);
         } else {
-            return response()->json(['success' => false, 'message' => 'Data tidak ditemukan.']);
+            return response()->json(['success' => false, 'message' => 'Stok Kosong.']);
         }
     }
 
@@ -611,7 +500,7 @@ class StrOut2Controller extends Controller
 
             foreach ($items as $itemId) {
                 // Misalnya, lakukan update status atau simpan di database
-                $item = StrOut2::find($itemId); // Ganti dengan model yang sesuai
+                $item = Str2Out2::find($itemId); // Ganti dengan model yang sesuai
                 if ($item) {
                     // Contoh update field
                     $item->status_checklist = '1'; // Ubah sesuai kebutuhan
@@ -627,7 +516,7 @@ class StrOut2Controller extends Controller
 
             // Update status to 3 based on the doc_no of the first updated item
             if ($updatedDocNo) {
-                $itemToUpdate = StrOut2::where('doc_no', $updatedDocNo)->first();
+                $itemToUpdate = Str2Out2::where('doc_no', $updatedDocNo)->first();
                 if ($itemToUpdate) {
                     $itemToUpdate->status = 3; // Set status to 3
                     $itemToUpdate->save();
@@ -639,7 +528,5 @@ class StrOut2Controller extends Controller
 
         return response()->json(['success' => false, 'message' => 'Tidak ada item yang dipilih.']);
     }
-
-
 
 }

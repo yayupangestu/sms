@@ -393,7 +393,7 @@
                                 username: username.value,
                                 password: password.value,
                                 level: level.value,
-                                line_id: line_id,
+                                line_id: line_id.value,
                                 _token: '{{ csrf_token() }}'
                             },
                             success: function(result) {

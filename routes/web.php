@@ -111,6 +111,8 @@ use App\Http\Controllers\StrOut19Controller;
 use App\Http\Controllers\StrOut20Controller;
 use App\Http\Controllers\StrKanbanController;
 use App\Http\Controllers\StrKanban2Controller;
+use App\Http\Controllers\ScannerDiesController;
+use App\Http\Controllers\DiesLocationController;
 
 
 /* 
@@ -1737,6 +1739,22 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+
+    Route::group(['prefix' => 'scandies'], function () {
+        Route::get('/', 'ScannerDiesController@index')->name('scandies.index');
+        Route::post('/dies-scan-save', [ScannerDiesController::class, 'store'])->name('dies.scan.save');
+
+    });
+
+    Route::group(['prefix' => 'locationdies'], function () {
+        Route::get('/dies-locations', [DiesLocationController::class, 'index'])->name('locations.index');
+        Route::post('/dies-locations/store', [DiesLocationController::class, 'store'])->name('ocations.store');
+        Route::post('/dies-locations/update/{id}', [DiesLocationController::class, 'update'])->name('locations.update');
+        Route::get('/dies-locations/delete/{id}', [DiesLocationController::class, 'destroy'])->name('locations.delete');
+        Route::get('/dies/location/search', [DiesLocationController::class, 'search'])->name('location.search');
+
+    });
+
     Route::group(['prefix' => 'andonts'], function () {
         Route::get('/', 'DashboardAndonTsController@index')->name('andonts.index');
     });
@@ -2039,6 +2057,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     });
 
+    Route::group(['prefix' => 'strout-2'], function () {
+        Route::get('/', 'Str2OutController@index')->name('strout-2.index');
+        Route::get('/list', 'Str2OutController@list')->name('strout-2.list');
+        Route::get('/getdoc', 'Str2OutController@getdoc')->name('strout-2.getdoc');
+        Route::get('/listdetail', 'Str2OutController@listdetail')->name('strout-2.listdetail');
+        Route::post('/create', 'Str2OutController@store')->name('strout-2.store');
+        Route::get('/edit', 'Str2OutController@edit')->name('strout-2.edit');
+        Route::post('/delete', 'Str2OutController@destroy')->name('strout-2.destroy');
+        Route::post('/deleteline', 'Str2OutController@destroyline')->name('strout-2.destroyline');
+        Route::get('/export', 'Str2OutController@export')->name('strout-2.export');
+
+    });
+
     Route::group(['prefix' => 'strin'], function () {
         Route::get('/', 'StrInController@index')->name('strin.index');
         Route::get('/list', 'StrInController@list')->name('strin.list');
@@ -2050,6 +2081,18 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/deleteline', 'StrInController@destroyline')->name('strin.destroyline');
         Route::get('/export', 'StrInController@export')->name('strin.export');
         // Route::get('/export', 'StrInController@export')->name('strout.export');
+    });
+
+    Route::group(['prefix' => 'strin2'], function () {
+        Route::get('/', 'Str2InController@index')->name('strin2.index');
+        Route::get('/list', 'Str2InController@list')->name('strin2.list');
+        Route::get('/getdoc', 'Str2InController@getdoc')->name('strin2.getdoc');
+        Route::get('/listdetail', 'Str2InController@listdetail')->name('strin2.listdetail');
+        Route::post('/create', 'Str2InController@store')->name('strin2.store');
+        Route::get('/edit', 'Str2InController@edit')->name('strin2.edit');
+        Route::post('/delete', 'Str2InController@destroy')->name('strin2.destroy');
+        Route::post('/deleteline', 'Str2InController@destroyline')->name('strin2.destroyline');
+        Route::get('/export', 'Str2InController@export')->name('strin2.export');
     });
 
     Route::group(['prefix' => 'dept'], function () {
@@ -2590,7 +2633,54 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/strout20/export-summary', [StrOut20Controller::class, 'exportSummary'])->name('strout20.export.summary');
         Route::get('/get-actual', [StrOut20Controller::class, 'getActual'])->name('strout20.getActual');
         Route::post('/saveChecked', 'StrOut20Controller@saveChecked')->name('strout20.saveChecked');
+    });
 
+    Route::group(['prefix' => 'strout_2'], function () {
+        Route::get('/', 'Str2Out2Controller@index')->name('strout_2.index');
+        Route::get('/list', 'Str2Out2Controller@list')->name('strout_2.list');
+        Route::get('/edit2', 'Str2Out2Controller@edit2')->name('strout_2.edit2');
+        Route::get('/getdoc', 'Str2Out2Controller@getdoc')->name('strout_2.getdoc');
+        Route::get('/listdetail', 'Str2Out2Controller@listdetail')->name('strout_2.listdetail');
+        Route::get('/listdetail2', 'Str2Out2Controller@listdetail2')->name('strout_2.listdetail2');
+        Route::get('/listdetail3', 'Str2Out2Controller@listdetail3')->name('strout_2.listdetail3');
+        Route::post('/create', 'Str2Out2Controller@store')->name('strout_2.store');
+        Route::post('/submit', 'Str2Out2Controller@submit')->name('strout_2.submit');
+        Route::post('/delete_draft', 'Str2Out2Controller@delete_draft')->name('strout_2.delete_draft');
+        Route::get('/edit', 'Str2Out2Controller@edit')->name('strout_2.edit');
+        Route::post('/delete', 'Str2Out2Controller@destroy')->name('strout_2.destroy');
+        Route::post('/deleteline', 'Str2Out2Controller@destroyline')->name('strout_2.destroyline');
+        Route::post('/update', 'Str2Out2Controller@update')->name('strout_2.update');
+        Route::post('/update2', 'Str2Out2Controller@update2')->name('strout_2.update2');
+        Route::post('/approve', [Str2Out2Controller::class, 'approve'])->name('strout_2.approve');
+        Route::post('/strout_2/approve2', [Str2Out2Controller::class, 'approve2'])->name('strout_2.approve2');
+        Route::post('/strout_2/approve3', [Str2Out2Controller::class, 'approve3'])->name('strout_2.approve3');
+        Route::get('/export', 'Str2Out2Controller@export')->name('strout_2.export');
+        Route::get('/get-actual', [Str2Out2Controller::class, 'getActual'])->name('strout_2.getActual');
+        Route::post('/saveChecked', 'Str2Out2Controller@saveChecked')->name('strout_2.saveChecked');
+    });
+
+    Route::group(['prefix' => 'strout_3'], function () {
+        Route::get('/', 'Str2Out3Controller@index')->name('strout_3.index');
+        Route::get('/list', 'Str2Out3Controller@list')->name('strout_3.list');
+        Route::get('/edit2', 'Str2Out3Controller@edit2')->name('strout_3.edit2');
+        Route::get('/getdoc', 'Str2Out3Controller@getdoc')->name('strout_3.getdoc');
+        Route::get('/listdetail', 'Str2Out3Controller@listdetail')->name('strout_3.listdetail');
+        Route::get('/listdetail2', 'Str2Out3Controller@listdetail2')->name('strout_3.listdetail2');
+        Route::get('/listdetail3', 'Str2Out3Controller@listdetail3')->name('strout_3.listdetail3');
+        Route::post('/create', 'Str2Out3Controller@store')->name('strout_3.store');
+        Route::post('/submit', 'Str2Out3Controller@submit')->name('strout_3.submit');
+        Route::post('/delete_draft', 'Str2Out3Controller@delete_draft')->name('strout_3.delete_draft');
+        Route::get('/edit', 'Str2Out3Controller@edit')->name('strout_3.edit');
+        Route::post('/delete', 'Str2Out3Controller@destroy')->name('strout_3.destroy');
+        Route::post('/deleteline', 'Str2Out3Controller@destroyline')->name('strout_3.destroyline');
+        Route::post('/update', 'Str2Out3Controller@update')->name('strout_3.update');
+        Route::post('/update2', 'Str2Out3Controller@update2')->name('strout_3.update2');
+        Route::post('/approve', [Str2Out3Controller::class, 'approve'])->name('strout_3.approve');
+        Route::post('/strout_3/approve2', [Str2Out3Controller::class, 'approve2'])->name('strout_3.approve2');
+        Route::post('/strout_3/approve3', [Str2Out3Controller::class, 'approve3'])->name('strout_3.approve3');
+        Route::get('/export', 'Str2Out3Controller@export')->name('strout_3.export');
+        Route::get('/get-actual', [Str2Out3Controller::class, 'getActual'])->name('strout_3.getActual');
+        Route::post('/saveChecked', 'Str2Out3Controller@saveChecked')->name('strout_3.saveChecked');
     });
 
 

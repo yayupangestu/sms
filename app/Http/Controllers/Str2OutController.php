@@ -1,47 +1,42 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\Models\Departement;
 use App\Models\StrBarang;
-use App\Models\StrOut;
+use App\Models\Str2Out;
 use App\Models\StrCategory;
 use App\Models\StrUom;
+use App\Models\Str2StokAtk;
+use App\Models\Str2StokConsum;
+use App\Models\Str2StokCuptip;
+use App\Models\Str2StokGas;
+use App\Models\Str2StokRtk;
+use App\Models\Str2StokTi;
 use App\Models\User;
-use App\Exports\ItemsOutExport;
-use App\Models\StrStokAtk;
-use App\Models\StrStokRtk;
-use App\Models\StrStokConsum;
-use App\Models\StrStokCuptip;
-use App\Models\StrStokTi;
-use App\Models\StrStokGas;
+use Illuminate\Http\Request;
+use App\Exports\ItemsOutExportStr2;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 use DB;
 
 
-class StrOutController extends Controller
+class Str2OutController extends Controller
 {
     public function index()
     {
-        $title = 'Item Out Store Room';
+        $title = 'Item Out Store Room 2';
         $departements = Departement::all();
-        $counts = DB::table('str_outs')
-            ->select('line_id', DB::raw('SUM(qty_out) as total'))
-            ->groupBy('line_id')
-            ->pluck('total', 'line_id');
-            
         $str_uoms = StrUom::all();
         $master_list_strs = DB::table('master_list_strs as a')
             ->select('a.id', 'a.name', 'b.name as category')
             ->join('str_categories as b', 'b.id', '=', 'a.category', 'left')
             ->get();
-        return view('store.out', compact('title', 'departements', 'str_uoms', 'master_list_strs', 'counts'));
+        return view('store.out', compact('title', 'departements', 'str_uoms', 'master_list_strs'));
     }
 
     public function list()
     {
-        $query = DB::table('str_outs as a')
+        $query = DB::table('str2_outs as a')
             ->select('a.date_plan', 'b.name_dept as line', DB::raw('CONCAT(a.date_plan, b.id)as mix_id'))
             ->join('departements as b', 'b.id', '=', 'a.line_id', 'left')
             ->groupBy('a.date_plan')
@@ -52,7 +47,7 @@ class StrOutController extends Controller
 
     public function listdetail(Request $request)
     {
-        $query = DB::table('str_outs as a')
+        $query = DB::table('str2_outs as a')
             ->select('a.id', 'c.name', 'a.qty_request', 'a.qty_out', 'a.keterangan', 'd.name as satuan', 'e.description as line_id')
             // ->join('depts as b', 'b.id', '=', 'a.line_id', 'left')
             ->join('master_list_strs as c', 'c.id', '=', 'a.item_id', 'left')
@@ -85,7 +80,7 @@ class StrOutController extends Controller
         // Hitung price_item
         $priceItem = $qtyOut * $price;
 
-        $out = new StrOut();
+        $out = new Str2Out();
         $out->line_id = $request->line_id;
         $out->item_id = $request->item_id;
         $out->qty_request = $request->qty_request;
@@ -117,61 +112,61 @@ class StrOutController extends Controller
         ]);
 
         // Ambil record dari tabel str_outs berdasarkan ID
-        $strOut = StrOut::find($request->id);
+        $Str2Out = Str2Out::find($request->id);
 
-        if ($strOut) {
+        if ($Str2Out) {
             // Ambil nilai qty_out dan item_id dari record yang akan dihapus
-            $qtyOut = $strOut->qty_out;
-            $itemId = $strOut->item_id;
+            $qtyOut = $Str2Out->qty_out;
+            $itemId = $Str2Out->item_id;
 
             // Mulai transaksi untuk memastikan semua operasi berhasil atau tidak sama sekali
             DB::beginTransaction();
 
             try {
                 // Temukan record yang sesuai di tabel str_stok_atks berdasarkan item_id
-                $strStokAtk = StrStokAtk::where('item_id', $itemId)->first();
-                if ($strStokAtk) {
-                    $strStokAtk->actual += $qtyOut;
-                    $strStokAtk->save();
+                $str2StokAtk = Str2StokAtk::where('item_id', $itemId)->first();
+                if ($str2StokAtk) {
+                    $str2StokAtk->actual += $qtyOut;
+                    $str2StokAtk->save();
                 }
 
                 // Temukan record yang sesuai di tabel str_stok_rtks berdasarkan item_id
-                $strStokRtk = StrStokRtk::where('item_id', $itemId)->first();
-                if ($strStokRtk) {
-                    $strStokRtk->actual += $qtyOut;
-                    $strStokRtk->save();
+                $str2StokRtk = Str2StokRtk::where('item_id', $itemId)->first();
+                if ($str2StokRtk) {
+                    $str2StokRtk->actual += $qtyOut;
+                    $str2StokRtk->save();
                 }
 
                 // Temukan record yang sesuai di tabel str_stok_consums berdasarkan item_id
-                $strStokConsum = StrStokConsum::where('item_id', $itemId)->first();
-                if ($strStokConsum) {
-                    $strStokConsum->actual += $qtyOut;
-                    $strStokConsum->save();
+                $str2StokConsum = Str2StokConsum::where('item_id', $itemId)->first();
+                if ($str2StokConsum) {
+                    $str2StokConsum->actual += $qtyOut;
+                    $str2StokConsum->save();
                 }
 
                 // Temukan record yang sesuai di tabel str_stok_ciptips berdasarkan item_id
-                $strStokCuptip = strStokCuptip::where('item_id', $itemId)->first();
-                if ($strStokCuptip) {
-                    $strStokCuptip->actual += $qtyOut;
-                    $strStokCuptip->save();
+                $str2StokCuptip = Str2StokCuptip::where('item_id', $itemId)->first();
+                if ($str2StokCuptip) {
+                    $str2StokCuptip->actual += $qtyOut;
+                    $str2StokCuptip->save();
                 }
 
                 //tabel str_stok_ti 
-                $strStokTi = strStokTi::where('item_id', $itemId)->first();
-                if ($strStokTi) {
-                    $strStokTi->actual += $qtyOut;
-                    $strStokTi->save();
+                $str2StokTi = Str2StokTi::where('item_id', $itemId)->first();
+                if ($str2StokTi) {
+                    $str2StokTi->actual += $qtyOut;
+                    $str2StokTi->save();
                 }
 
                 //tabel str_stok_gas
-                $strStokGas = strStokGas::where('item_id', $itemId)->first();
-                if ($strStokGas) {
-                    $strStokGas->actual += $qtyOut;
-                    $strStokGas->save();
+                $str2StokGas = Str2StokGas::where('item_id', $itemId)->first();
+                if ($str2StokGas) {
+                    $str2StokGas->actual += $qtyOut;
+                    $str2StokGas->save();
                 }
 
                 // Hapus record dari tabel str_outs
-                $strOut->delete();
+                $Str2Out->delete();
 
                 // Commit transaksi jika semua operasi berhasil
                 DB::commit();
@@ -223,7 +218,7 @@ class StrOutController extends Controller
             'updateby' => auth()->user()->id,
         ];
 
-        $query = StrOut::where('id', $request->id)->update($data);
+        $query = Str2Out::where('id', $request->id)->update($data);
 
         if ($query) {
             return response()->json([
@@ -240,49 +235,28 @@ class StrOutController extends Controller
 
     public function updatePriceItems()
     {
-        // 1. Perbaiki harga di master_list_strs
-        $barangs = DB::table('master_list_strs')->get();
-        foreach ($barangs as $b) {
-            $rawPrice = $b->price;
-            
-            // Hilangkan semua titik (asumsi ribuan)
-            $cleanPrice = str_replace('.', '', $rawPrice);
-            // Ganti koma jadi titik (untuk desimal)
-            $cleanPrice = str_replace(',', '.', $cleanPrice);
-            
-            $numPrice = (float)$cleanPrice;
+        $outItems = Str2Out::all();
 
-            // Jika nilai masih di bawah 1000, kemungkinan besar itu ribuan yang terpotong 
-            // (misal "43.000" jadi 43.0 atau "147,48" jadi 147.48)
-            if ($numPrice > 0 && $numPrice < 1000) {
-                $numPrice = $numPrice * 1000;
-            }
-
-            DB::table('master_list_strs')->where('id', $b->id)->update(['price' => $numPrice]);
-        }
-
-        // 2. Update price_item di str_outs berdasarkan harga yang sudah diperbaiki
-        $outItems = StrOut::all();
         foreach ($outItems as $item) {
             $barang = DB::table('master_list_strs')->where('id', $item->item_id)->first();
 
             if ($barang) {
-                $priceItem = $item->qty_out * (float)$barang->price;
+                $priceItem = $item->qty_out * $barang->price;
                 $item->update(['price_item' => $priceItem]);
             }
         }
 
         return response()->json([
             'success' => true,
-            'msg' => 'Price items and master prices updated successfully with thousands correction.',
+            'msg' => 'Price items updated successfully.',
         ]);
     }
 
     public function edit(Request $request)
     {
-        $cek = StrOut::where('id', $request->id)->count();
+        $cek = Str2Out::where('id', $request->id)->count();
         if ($cek > 0) {
-            $row = StrOut::where('id', $request->id)->first();
+            $row = Str2Out::where('id', $request->id)->first();
             return response()->json([
                 'success' => true,
                 'id' => $row->id,
@@ -303,7 +277,7 @@ class StrOutController extends Controller
 
     public function destroy(Request $request)
     {
-        $query = StrOut::where('date_plan', $request->date_plan)->where('line_id', $request->idline)->delete();
+        $query = Str2Out::where('date_plan', $request->date_plan)->where('line_id', $request->idline)->delete();
         if ($query) {
             return response()->json([
                 'success' => true,
@@ -326,10 +300,10 @@ class StrOutController extends Controller
         // Cek apakah item_id ada atau kosong
         if ($barangId) {
             // Jika item_id ada, filter berdasarkan tanggal dan item_id
-            return Excel::download(new ItemsOutExport($startDate, $endDate, $barangId), 'Item Out ASI-1.xlsx');
+            return Excel::download(new ItemsOutExportStr2($startDate, $endDate, $barangId), 'Item Out ASI-2.xlsx');
         } else {
             // Jika item_id tidak ada, filter hanya berdasarkan tanggal
-            return Excel::download(new ItemsOutExport($startDate, $endDate, null), 'Item Out ASI-1.xlsx');
+            return Excel::download(new ItemsOutExportStr2($startDate, $endDate, null), 'Item Out ASI-2.xlsx');
         }
     }
 }

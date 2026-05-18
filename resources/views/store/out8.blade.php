@@ -173,8 +173,12 @@
 
                             </h3>
                             <div class="card-tools">
-                                {{-- <button class="btn btn-primary btn-sm" id="btn_add"><i class="fa fa-plus"></i>
-                                    Add</button> --}}
+                                <a href="{{ route('strout2.index') }}" class="btn btn-success btn-sm ml-1">
+                                    <i class="fas fa-file-invoice"></i> E-SPB STAMPING
+                                </a>
+                                <a href="{{ route('strout3.index') }}" class="btn btn-warning btn-sm ml-1">
+                                    <i class="fas fa-file-invoice"></i> E-SPB WELDING
+                                </a>
                             </div>
                         </div>
                         <div class="card-body">

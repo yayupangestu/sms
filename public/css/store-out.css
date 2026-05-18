@@ -1,0 +1,270 @@
+/* 
+  Store Out Dashboard - Professional Blue Grid System 
+  Unified Design with Industrial Aesthetics
+*/
+
+:root {
+    --st-bg: #f0f4f8;
+    --st-card-bg: #ffffff;
+    --st-text: #1e293b;
+    --st-text-muted: #64748b;
+    --st-accent: #245a7e; /* Professional Blue */
+    --st-accent-hover: #1b4561;
+    --st-border: #cbd5e1; /* Clearer Border for Grid */
+    --st-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-st {
+    --st-bg: #0b1120;
+    --st-card-bg: #151f33;
+    --st-text: #f8fafc;
+    --st-text-muted: #94a3b8;
+    --st-border: #1e293b;
+    --st-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+}
+
+/* Global Dark Mode Overrides */
+.dark-mode-st, 
+.dark-mode-st .content-wrapper,
+.dark-mode-st .main-footer,
+.dark-mode-st .main-header {
+    background-color: var(--st-bg) !important;
+    color: var(--st-text) !important;
+}
+
+.dark-mode-st .card {
+    background-color: var(--st-card-bg) !important;
+    color: var(--st-text) !important;
+}
+
+/* Fix: Inputs should not be too dark in dark mode */
+.dark-mode-st .form-control,
+.dark-mode-st .select2-container--bootstrap4 .select2-selection--single {
+    background-color: #f8fafc !important; /* Keep inputs light for readability */
+    color: #1e293b !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* Ensure text is black in inputs when in dark mode */
+.dark-mode-st .form-control::placeholder {
+    color: #64748b !important;
+}
+
+.dark-mode-st .select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+    color: #1e293b !important;
+}
+
+.dark-mode-st .select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
+    color: #64748b !important;
+}
+
+/* Ensure Select2 Dropdown results are also readable in dark mode */
+.dark-mode-st .select2-results__option {
+    color: #1e293b !important;
+    background-color: #ffffff !important;
+}
+
+.dark-mode-st .select2-results__option--highlighted {
+    color: #ffffff !important;
+    background-color: var(--st-accent) !important;
+}
+
+.dark-mode-st .select2-search--dropdown .select2-search__field {
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
+}
+
+body {
+    background-color: var(--st-bg) !important;
+    color: var(--st-text) !important;
+    transition: background-color 0.3s ease;
+}
+
+.st-container {
+    padding: 25px;
+    min-height: 100vh;
+}
+
+/* Card Styling */
+.st-card {
+    background: var(--st-card-bg) !important;
+    border: 1px solid var(--st-border) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--st-shadow) !important;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.st-card-header {
+    background: var(--st-accent) !important;
+    border-bottom: 2px solid var(--st-accent-hover) !important;
+    padding: 12px 20px !important;
+    color: white !important;
+}
+
+.st-card-title {
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+    font-size: 1.1rem !important;
+}
+
+/* TABLE GRID SYSTEM */
+.st-table {
+    color: var(--st-text) !important;
+    border-collapse: collapse !important; /* Proper Grid */
+    width: 100% !important;
+    border: 1px solid var(--st-border) !important;
+}
+
+.st-table thead th {
+    background: #245a7e !important;
+    color: #ffffff !important;
+    text-align: center;
+    vertical-align: middle !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    padding: 10px 15px !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+}
+
+.st-table tbody td {
+    padding: 10px 15px !important;
+    border: 1px solid var(--st-border) !important; /* Full Grid Lines */
+    vertical-align: middle !important;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.st-table tbody tr:nth-child(even) {
+    background-color: rgba(36, 90, 126, 0.03) !important;
+}
+
+.st-table tbody tr:hover {
+    background-color: rgba(36, 90, 126, 0.08) !important;
+}
+
+/* Form Elements */
+.form-label-custom {
+    font-weight: 700;
+    color: var(--st-accent);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.form-control {
+    background: var(--st-card-bg) !important;
+    border: 1px solid var(--st-border) !important;
+    color: var(--st-text) !important;
+    border-radius: 4px !important;
+    height: 38px !important;
+    padding: 0.375rem 0.75rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Select2 ULTIMATE Alignment Fix */
+.select2-container--bootstrap4 .select2-selection--single {
+    height: 38px !important;
+    border: 1px solid var(--st-border) !important;
+    border-radius: 4px !important;
+    padding: 0 !important;
+    background-color: var(--st-card-bg) !important;
+    display: flex !important;
+    align-items: center !important;
+    overflow: hidden !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__rendered {
+    padding-left: 0.75rem !important;
+    padding-right: 25px !important;
+    color: var(--st-text) !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    margin: 0 !important;
+    line-height: normal !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__placeholder {
+    color: var(--st-text-muted) !important;
+    line-height: normal !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow {
+    height: 38px !important;
+    top: 0 !important;
+    right: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    border-left: none !important;
+}
+
+.select2-container--bootstrap4 .select2-selection--single .select2-selection__arrow b {
+    margin-top: 0 !important;
+    border-width: 5px 4px 0 4px !important;
+}
+
+/* Status Badges - Pill Style */
+.status-badge {
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    display: inline-block;
+    min-width: 150px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.status-cek-complete { background: #90ee90 !important; color: #004d40 !important; border-color: #81c784 !important; font-size: 0.75rem !important; }
+.status-trans-complete { background: #69f0ae !important; color: #004d40 !important; border-color: #00c853 !important; font-size: 0.75rem !important; }
+.status-storeroom { background: #e0f7fa !important; color: #006064 !important; border-color: #b2ebf2 !important; }
+.status-approved { background: #e8f5e9 !important; color: #1b5e20 !important; border-color: #c8e6c9 !important; }
+
+/* Buttons */
+.btn-primary { background: var(--st-accent) !important; border: none !important; font-weight: 700 !important; }
+.btn-info { background: #00bcd4 !important; border: none !important; font-weight: 700 !important; }
+.btn-success { background: #2e7d32 !important; border: none !important; font-weight: 700 !important; }
+
+/* Modal Styles */
+.st-modal-content {
+    border-radius: 8px !important;
+    border: none !important;
+}
+
+.st-modal-header {
+    background: var(--st-accent) !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* Grid Filter Bar */
+.form-inline .input-group {
+    border: 1px solid var(--st-border);
+    border-radius: 4px;
+}
+
+.form-inline .input-group-text {
+    background: #f8fafc !important;
+    border: none;
+    font-weight: 700;
+    color: var(--st-accent);
+}
+
+.st-theme-toggle {
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.st-theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}

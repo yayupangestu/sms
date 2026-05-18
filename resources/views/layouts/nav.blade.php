@@ -21,7 +21,6 @@
       <a class="nav-link position-relative" data-toggle="dropdown" href="#" title="Komentar / Feedback">
         <i style="font-size: 25px; color:rgb(0, 0, 0)" class="far fa-comments"></i>
         <span class="badge badge-info navbar-badge" style="position: absolute; top: -5px; right: -5px; font-size: 14px; padding: 4px 6px;">3</span>
-
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-header">3 Notifikasi Baru</span>
